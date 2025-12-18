@@ -1,7 +1,7 @@
 import TopBar from "@/components/TopBar";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import ThemeRegistry from "@/theme/ThemeRegistry";
+import Providers from "@/theme/Provider";
 
 export default function RootLayout({
   children,
@@ -11,12 +11,12 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
-        <ThemeRegistry>
+        <Providers>
           <TopBar />
           <Header />
           {children}
           <Footer />
-        </ThemeRegistry>
+        </Providers>
       </body>
     </html>
   );
