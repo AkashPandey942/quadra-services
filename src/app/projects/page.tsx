@@ -14,7 +14,7 @@ export default function ProjectsPage() {
 
       <Grid container spacing={4}>
         {projects.map((p) => (
-          <Grid item xs={12} md={6} key={p.title}>
+          <Grid size={{ xs: 12, md: 6 }} key={p.title}>
             <Card>
               <CardContent>
                 <Typography fontWeight="bold">{p.title}</Typography>

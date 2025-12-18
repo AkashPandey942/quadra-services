@@ -12,7 +12,7 @@ export default function ServicesPage() {
 
       <Grid container spacing={4}>
         {services.map((s: Service) => (
-          <Grid item xs={12} sm={6} md={3} key={s.slug}>
+          <Grid size={{ xs: 12, sm: 6, md: 3 }} key={s.slug}>
             <ServiceCard service={s} />
           </Grid>
         ))}
