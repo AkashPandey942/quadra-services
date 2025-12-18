@@ -9,7 +9,7 @@ export default function Testimonials() {
 
       <Grid container spacing={3}>
         {["Great service!", "Highly professional team"].map((t, i) => (
-          <Grid item xs={12} md={6} key={i}>
+          <Grid size={{ xs: 12, md: 6 }} key={i}>
             <Card>
               <CardContent>
                 <Typography>&quot;{t}&quot;</Typography>

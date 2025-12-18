@@ -24,7 +24,7 @@ export default function AboutPage() {
 
       <Grid container spacing={4}>
         {founders.map((f) => (
-          <Grid item xs={12} md={3} key={f.name}>
+          <Grid size={{ xs: 12, md: 3 }} key={f.name}>
             <Card>
               <CardContent>
                 <Typography fontWeight="bold">{f.name}</Typography>
