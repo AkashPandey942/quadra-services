@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Container, Typography, Card, CardContent, Grid, Avatar, Rating, Chip, Button, Dialog, DialogTitle, DialogContent, DialogActions, TextField, Stack, useTheme as useMuiTheme } from "@mui/material";
+import { Box, Container, Typography, Card, CardContent, Avatar, Rating, Chip, Button, Dialog, DialogTitle, DialogContent, DialogActions, TextField, Stack, useTheme as useMuiTheme } from "@mui/material";
 import { motion } from "framer-motion";
 import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
 import AddIcon from "@mui/icons-material/Add";
@@ -195,18 +195,18 @@ export default function Testimonials() {
         </Box>
 
         {/* Testimonial Cards */}
-        <Grid container spacing={4} sx={{ px: { md: 4 } }}>
+        <Box component="section" sx={{ display: "grid", gap: 4, px: { md: 4 }, gridTemplateColumns: { xs: "1fr", md: "repeat(2, 1fr)" } }}>
           {loading ? (
-            <Grid size={{ xs: 12 }} sx={{ textAlign: "center", py: 8 }}>
+            <Box sx={{ gridColumn: "1 / -1", textAlign: "center", py: 8 }}>
               <Typography sx={{ color: "rgba(255, 255, 255, 0.5)" }}>Loading reviews...</Typography>
-            </Grid>
+            </Box>
           ) : approvedTestimonials.length === 0 ? (
-            <Grid size={{ xs: 12 }} sx={{ textAlign: "center", py: 8 }}>
+            <Box sx={{ gridColumn: "1 / -1", textAlign: "center", py: 8 }}>
               <Typography sx={{ color: "rgba(255, 255, 255, 0.5)" }}>No reviews found.</Typography>
-            </Grid>
+            </Box>
           ) : (
             approvedTestimonials.map((testimonial, index) => (
-              <Grid size={{ xs: 12, md: 6 }} key={testimonial._id}>
+              <Box key={testimonial._id}>
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -277,7 +277,7 @@ export default function Testimonials() {
                           fontStyle: "italic",
                         }}
                       >
-                        "{testimonial.testimonial}"
+                        {testimonial.testimonial}
                       </Typography>
 
                       <Box sx={{ display: "flex", alignItems: "center", gap: 2, mt: 'auto' }}>
@@ -306,10 +306,10 @@ export default function Testimonials() {
                     </CardContent>
                   </Card>
                 </motion.div>
-              </Grid>
+              </Box>
             ))
           )}
-        </Grid>
+        </Box>
 
         {/* Add Review Dialog */}
         <Dialog
@@ -346,8 +346,8 @@ export default function Testimonials() {
                   "& .MuiInputLabel-root": { color: "rgba(255, 255, 255, 0.4)" }
                 }}
               />
-              <Grid container spacing={2}>
-                <Grid size={{ xs: 6 }}>
+              <Box sx={{ display: "grid", gap: 2, gridTemplateColumns: { xs: "1fr", sm: "repeat(2, 1fr)" } }}>
+                <Box>
                   <TextField
                     label="Role"
                     fullWidth
@@ -359,8 +359,8 @@ export default function Testimonials() {
                       "& .MuiInputLabel-root": { color: "rgba(255, 255, 255, 0.4)" }
                     }}
                   />
-                </Grid>
-                <Grid size={{ xs: 6 }}>
+                </Box>
+                <Box>
                   <TextField
                     label="Company"
                     fullWidth
@@ -372,8 +372,8 @@ export default function Testimonials() {
                       "& .MuiInputLabel-root": { color: "rgba(255, 255, 255, 0.4)" }
                     }}
                   />
-                </Grid>
-              </Grid>
+                </Box>
+              </Box>
               <TextField
                 label="Your Testimonial"
                 fullWidth
