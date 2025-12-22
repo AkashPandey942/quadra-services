@@ -33,23 +33,82 @@ export default function Header() {
         position="sticky"
         elevation={2}
         sx={{
-          background: "#fff",
-          color: "#000",
+          background: "rgba(2, 6, 23, 0.8)",
+          backdropFilter: "blur(12px)",
+          color: "#fff",
+          borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
         }}
       >
         <Toolbar sx={{ px: { xs: 2, md: 4 } }}>
           {/* LOGO */}
-          <Typography
-            variant="h6"
+          <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
+            <Box
+              component="img"
+              src="/images/ApexNexon.png"
+              alt="Apex Nexon Logo"
+              sx={{
+                height: { xs: 35, md: 45 },
+                width: { xs: "160px", md: "200px" }, // Cropping to show "AN ApexNexon" part
+                objectFit: "cover",
+                objectPosition: "left center",
+                cursor: "pointer",
+                filter: "brightness(1.1)", // Pop on dark background
+              }}
+            />
+          </Link>
+
+          {/* CENTER BREADCRUMB - DESKTOP ONLY */}
+          <Box
             sx={{
               flexGrow: 1,
-              fontWeight: 700,
-              letterSpacing: 1,
-              cursor: "pointer",
+              display: { xs: "none", md: "flex" },
+              justifyContent: "center",
+              alignItems: "center",
             }}
           >
-            QuadraTech
-          </Typography>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                background: "rgba(255, 255, 255, 0.03)",
+                px: 2,
+                py: 0.5,
+                borderRadius: "20px",
+                border: "1px solid rgba(255, 255, 255, 0.05)",
+              }}
+            >
+              <Typography
+                variant="caption"
+                sx={{
+                  color: "rgba(255, 255, 255, 0.5)",
+                  fontWeight: 500,
+                  fontSize: "0.75rem",
+                }}
+              >
+                Home
+              </Typography>
+              <Typography
+                variant="caption"
+                sx={{
+                  mx: 1,
+                  color: "divider",
+                }}
+              >
+                /
+              </Typography>
+              <Typography
+                variant="subtitle2"
+                sx={{
+                  fontWeight: 700,
+                  color: "primary.main",
+                  fontSize: "0.85rem",
+                  letterSpacing: "0.5px",
+                }}
+              >
+                Comprehensive Technology Services
+              </Typography>
+            </Box>
+          </Box>
 
           {/* DESKTOP NAV */}
           <Box
@@ -76,19 +135,19 @@ export default function Header() {
                     mx: 0.5,
                     borderRadius: "4px",
                     color: active
-                      ? "rgba(0,0,0,0.9)"
-                      : "rgba(0,0,0,0.6)",
+                      ? "#fff"
+                      : "rgba(255, 255, 255, 0.6)",
                     transition: "all 0.2s ease",
                     textDecoration: "none",
                     cursor: "pointer",
 
                     "&:hover": {
-                      background: "rgba(0,0,0,0.06)",
-                      color: "rgba(0,0,0,0.9)",
+                      background: "rgba(255, 255, 255, 0.06)",
+                      color: "#fff",
                     },
 
                     "&:active": {
-                      background: "rgba(0,0,0,0.1)",
+                      background: "rgba(255, 255, 255, 0.1)",
                     },
                   }}
                 >
@@ -100,7 +159,7 @@ export default function Header() {
 
           {/* MOBILE HAMBURGER */}
           <IconButton
-            sx={{ display: { lg: "none" } }}
+            sx={{ display: { lg: "none" }, color: "white" }}
             onClick={() => setOpen(true)}
           >
             <MenuIcon />

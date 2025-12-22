@@ -1,6 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --primary: #6A1B9A;
+  --primary-light: #9c4dcc;
+  --primary-dark: #4a148c;
+  --secondary: #E91E63;
+  --secondary-light: #ff6090;
+  --secondary-dark: #b0003a;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -40,10 +50,13 @@ a {
     color-scheme: dark;
   }
 }
-html, body {
+
+html,
+body {
   margin: 0;
   padding: 0;
 }
+
 a {
   text-decoration: none;
   color: inherit;

@@ -3,13 +3,30 @@
 import createCache from "@emotion/cache";
 import { useServerInsertedHTML } from "next/navigation";
 import { CacheProvider } from "@emotion/react";
-import { ThemeProvider } from "@mui/material/styles";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import React, { useState } from "react";
-import theme from "./theme";
+import React, { useState, useMemo } from "react";
+import { getThemeOptions } from "./theme";
+import { BackgroundProvider, useBackground } from "@/context/BackgroundContext";
 
 // This implementation follows the official MUI guide for Next.js App Router
 // https://mui.com/material-ui/guides/next-js-app-router/
+
+function ThemeProviderWrapper({ children }: { children: React.ReactNode }) {
+  const { currentTheme } = useBackground();
+
+  const theme = useMemo(() =>
+    createTheme(getThemeOptions(currentTheme.primary, currentTheme.secondary)),
+    [currentTheme]
+  );
+
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      {children}
+    </ThemeProvider>
+  );
+}
 
 export default function ThemeRegistry({ children }: { children: React.ReactNode }) {
   const [{ cache, flush }] = useState(() => {
@@ -54,10 +71,11 @@ export default function ThemeRegistry({ children }: { children: React.ReactNode 
 
   return (
     <CacheProvider value={cache}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        {children}
-      </ThemeProvider>
+      <BackgroundProvider>
+        <ThemeProviderWrapper>
+          {children}
+        </ThemeProviderWrapper>
+      </BackgroundProvider>
     </CacheProvider>
   );
 }
