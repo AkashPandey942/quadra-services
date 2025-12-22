@@ -76,7 +76,7 @@ export default function WhyChooseUs() {
 
         const ctx = gsap.context(() => {
             const getScrollAmount = () => {
-                let sectionWidth = sectionRef.current?.scrollWidth || 0;
+                const sectionWidth = sectionRef.current?.scrollWidth || 0;
                 return -(sectionWidth - window.innerWidth + 150);
             };
 

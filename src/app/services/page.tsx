@@ -1,4 +1,4 @@
-import { Container, Grid, Typography } from "@mui/material";
+import { Container, Typography, Box } from "@mui/material";
 import { services } from "@/data/services";
 import ServiceCard from "@/components/ServiceCard";
 import type { Service } from "@/types";
@@ -10,13 +10,13 @@ export default function ServicesPage() {
         Our Services
       </Typography>
 
-      <Grid container spacing={4}>
+      <Box component="section" sx={{ display: 'grid', gap: 4, gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(4, 1fr)' } }}>
         {services.map((s: Service) => (
-          <Grid size={{ xs: 12, sm: 6, md: 3 }} key={s.slug}>
+          <Box key={s.slug}>
             <ServiceCard service={s} />
-          </Grid>
+          </Box>
         ))}
-      </Grid>
+      </Box>
     </Container>
   );
 }

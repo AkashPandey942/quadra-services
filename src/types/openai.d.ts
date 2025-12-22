@@ -1,4 +1,4 @@
 declare module "openai" {
-  const OpenAI: any;
+  const OpenAI: unknown;
   export default OpenAI;
 }

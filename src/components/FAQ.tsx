@@ -203,7 +203,7 @@ export default function FAQ() {
                         Still have questions?
                     </Typography>
                     <Typography sx={{ color: "rgba(255, 255, 255, 0.5)", mb: 4, maxWidth: 450, mx: "auto" }}>
-                        We're here to help you navigate your digital transformation journey with confidence.
+                        We&apos;re here to help you navigate your digital transformation journey with confidence.
                     </Typography>
                     <Button
                         variant="contained"

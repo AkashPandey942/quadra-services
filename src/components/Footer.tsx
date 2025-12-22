@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Container, Typography, Grid, IconButton, Stack, Link as MuiLink, Divider } from "@mui/material";
+import { Box, Container, Typography, IconButton, Stack, Link as MuiLink, Divider } from "@mui/material";
 import Link from "next/link";
 import { useBackground } from "@/context/BackgroundContext";
 import FacebookIcon from "@mui/icons-material/Facebook";
@@ -45,9 +45,9 @@ export default function Footer() {
       }}
     >
       <Container maxWidth="xl">
-        <Grid container spacing={6} sx={{ mb: 8 }}>
+        <Box sx={{ display: 'grid', gap: 6, mb: 8, gridTemplateColumns: { xs: '1fr', md: '4fr 2.5fr 2.5fr 3fr' } }}>
           {/* Column 1: Brand & Social */}
-          <Grid size={{ xs: 12, md: 4 }}>
+          <Box>
             <Box
               component={Link}
               href="/"
@@ -104,10 +104,10 @@ export default function Footer() {
                 </IconButton>
               ))}
             </Stack>
-          </Grid>
+          </Box>
 
           {/* Column 2: Services */}
-          <Grid size={{ xs: 12, sm: 6, md: 2.5 }}>
+          <Box>
             <Typography variant="h6" sx={{ fontWeight: 800, mb: 3, letterSpacing: 0.5 }}>
               Our Services
             </Typography>
@@ -131,10 +131,10 @@ export default function Footer() {
                 </MuiLink>
               ))}
             </Stack>
-          </Grid>
+          </Box>
 
           {/* Column 3: Quick Links */}
-          <Grid size={{ xs: 12, sm: 6, md: 2.5 }}>
+          <Box>
             <Typography variant="h6" sx={{ fontWeight: 800, mb: 3, letterSpacing: 0.5 }}>
               Quick Links
             </Typography>
@@ -159,10 +159,10 @@ export default function Footer() {
                 </MuiLink>
               ))}
             </Stack>
-          </Grid>
+          </Box>
 
           {/* Column 4: Reach Us */}
-          <Grid size={{ xs: 12, md: 3 }}>
+          <Box>
             <Typography variant="h6" sx={{ fontWeight: 800, mb: 3, letterSpacing: 0.5 }}>
               Reach Us
             </Typography>
@@ -187,8 +187,8 @@ export default function Footer() {
                 </Typography>
               </Box>
             </Stack>
-          </Grid>
-        </Grid>
+          </Box>
+        </Box>
 
         <Divider sx={{ borderColor: "rgba(255, 255, 255, 0.05)", mb: 4 }} />
 

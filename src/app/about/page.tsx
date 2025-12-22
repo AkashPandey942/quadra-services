@@ -1,5 +1,4 @@
-import { Container, Typography, Card, CardContent } from "@mui/material";
-import Grid from "@mui/material/Grid";
+import { Container, Typography, Card, CardContent, Box } from "@mui/material";
 
 
 
@@ -22,18 +21,25 @@ export default function AboutPage() {
         digital solutions for startups and enterprises.
       </Typography>
 
-      <Grid container spacing={4}>
+      <Box
+        component="section"
+        sx={{
+          display: "grid",
+          gap: 4,
+          gridTemplateColumns: { xs: "repeat(1, 1fr)", md: "repeat(4, 1fr)" },
+        }}
+      >
         {founders.map((f) => (
-          <Grid size={{ xs: 12, md: 3 }} key={f.name}>
+          <Box key={f.name}>
             <Card>
               <CardContent>
                 <Typography fontWeight="bold">{f.name}</Typography>
                 <Typography color="text.secondary">{f.role}</Typography>
               </CardContent>
             </Card>
-          </Grid>
+          </Box>
         ))}
-      </Grid>
+      </Box>
     </Container>
   );
 }
