@@ -183,7 +183,7 @@ export default function AdminReviewsPage() {
     const filteredReviews = getFilteredReviews();
 
     // Get status color
-    const getStatusColor = (status: string) => {
+    const getStatusColor = (status: Testimonial['status']): 'success' | 'warning' | 'error' | 'default' => {
         switch (status) {
             case 'approved': return 'success';
             case 'pending': return 'warning';
@@ -250,8 +250,8 @@ export default function AdminReviewsPage() {
                 </Box>
 
                 {/* Stats */}
-                <Grid container spacing={3} sx={{ mb: 4 }}>
-                    <Grid size={{ xs: 12, sm: 4 }}>
+                <Box sx={{ display: 'grid', gap: 3, mb: 4, gridTemplateColumns: { xs: '1fr', sm: 'repeat(3, 1fr)' } }}>
+                    <Box>
                         <Card>
                             <CardContent>
                                 <Typography variant="h4" fontWeight="bold" color="warning.main">
@@ -262,8 +262,8 @@ export default function AdminReviewsPage() {
                                 </Typography>
                             </CardContent>
                         </Card>
-                    </Grid>
-                    <Grid size={{ xs: 12, sm: 4 }}>
+                    </Box>
+                    <Box>
                         <Card>
                             <CardContent>
                                 <Typography variant="h4" fontWeight="bold" color="success.main">
@@ -274,8 +274,8 @@ export default function AdminReviewsPage() {
                                 </Typography>
                             </CardContent>
                         </Card>
-                    </Grid>
-                    <Grid size={{ xs: 12, sm: 4 }}>
+                    </Box>
+                    <Box>
                         <Card>
                             <CardContent>
                                 <Typography variant="h4" fontWeight="bold" color="error.main">
@@ -286,8 +286,8 @@ export default function AdminReviewsPage() {
                                 </Typography>
                             </CardContent>
                         </Card>
-                    </Grid>
-                </Grid>
+                    </Box>
+                </Box>
 
                 {/* Tabs */}
                 <Card sx={{ mb: 3 }}>
@@ -300,13 +300,13 @@ export default function AdminReviewsPage() {
                 </Card>
 
                 {/* Reviews List */}
-                <Grid container spacing={3}>
+                <Box sx={{ display: 'grid', gap: 3 }}>
                     {loading && allReviews.length === 0 ? (
-                        <Grid size={{ xs: 12 }} sx={{ textAlign: "center", py: 8 }}>
+                        <Box sx={{ textAlign: "center", py: 8 }}>
                             <Typography color="text.secondary">Loading reviews...</Typography>
-                        </Grid>
+                        </Box>
                     ) : filteredReviews.length === 0 ? (
-                        <Grid size={{ xs: 12 }}>
+                        <Box>
                             <Card>
                                 <CardContent sx={{ textAlign: "center", py: 8 }}>
                                     <Typography variant="h6" color="text.secondary">
@@ -314,10 +314,10 @@ export default function AdminReviewsPage() {
                                     </Typography>
                                 </CardContent>
                             </Card>
-                        </Grid>
+                        </Box>
                     ) : (
                         filteredReviews.map((review) => (
-                            <Grid size={{ xs: 12 }} key={review._id}>
+                            <Box key={review._id}>
                                 <Card>
                                     <CardContent>
                                         <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", mb: 2 }}>
@@ -336,7 +336,7 @@ export default function AdminReviewsPage() {
                                             </Box>
                                             <Chip
                                                 label={review.status.toUpperCase()}
-                                                color={getStatusColor(review.status) as any}
+                                                color={getStatusColor(review.status)}
                                                 size="small"
                                             />
                                         </Box>
@@ -344,7 +344,7 @@ export default function AdminReviewsPage() {
                                         <Rating value={review.rating} readOnly size="small" sx={{ mb: 1 }} />
 
                                         <Typography variant="body1" sx={{ mb: 2, fontStyle: "italic" }}>
-                                            "{review.testimonial}"
+                                            &ldquo;{review.testimonial}&rdquo;
                                         </Typography>
 
                                         <Typography variant="caption" color="text.secondary" display="block" mb={2}>
@@ -395,10 +395,10 @@ export default function AdminReviewsPage() {
                                         </Box>
                                     </CardContent>
                                 </Card>
-                            </Grid>
+                            </Box>
                         ))
                     )}
-                </Grid>
+                </Box>
 
                 {/* Edit Dialog */}
                 <Dialog open={editDialog} onClose={() => setEditDialog(false)} maxWidth="sm" fullWidth>

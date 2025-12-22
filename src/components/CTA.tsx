@@ -31,7 +31,8 @@ export default function CTA() {
     );
 
     useEffect(() => {
-        setMounted(true);
+        const id = window.setTimeout(() => setMounted(true), 0);
+        return () => clearTimeout(id);
     }, []);
 
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -190,7 +191,7 @@ export default function CTA() {
                                     textShadow: "0 10px 30px rgba(0,0,0,0.5)",
                                 }}
                             >
-                                Let's Build Your <br />
+                                Let&apos;s Build Your <br />
                                 <Box
                                     component="span"
                                     sx={{

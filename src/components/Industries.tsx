@@ -207,7 +207,7 @@ export default function Industries() {
                     {industries.map((industry, index) => (
                         <Box
                             key={index}
-                            ref={(el: any) => (cardsRef.current[index] = el)}
+                            ref={(el: HTMLDivElement | null) => (cardsRef.current[index] = el)}
                             onMouseMove={(e) => handleMouseMove(e, index)}
                             onMouseLeave={() => handleMouseLeave(index)}
                             style={{ transformStyle: "preserve-3d" }}

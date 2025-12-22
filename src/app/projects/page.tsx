@@ -1,4 +1,4 @@
-import { Container, Typography, Grid, Card, CardContent } from "@mui/material";
+import { Container, Typography, Box, Card, CardContent } from "@mui/material";
 
 const projects = [
   { title: "E-Commerce Platform", desc: "Next.js + Payments" },
@@ -12,18 +12,18 @@ export default function ProjectsPage() {
         Our Projects
       </Typography>
 
-      <Grid container spacing={4}>
+      <Box component="section" sx={{ display: 'grid', gap: 4, gridTemplateColumns: { xs: '1fr', md: 'repeat(2, 1fr)' } }}>
         {projects.map((p) => (
-          <Grid size={{ xs: 12, md: 6 }} key={p.title}>
+          <Box key={p.title}>
             <Card>
               <CardContent>
                 <Typography fontWeight="bold">{p.title}</Typography>
                 <Typography color="text.secondary">{p.desc}</Typography>
               </CardContent>
             </Card>
-          </Grid>
+          </Box>
         ))}
-      </Grid>
+      </Box>
     </Container>
   );
 }
