@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 import { useBackground } from "@/context/BackgroundContext";
 
 // Testimonial interface with MongoDB fields
+// Testimonial interface with MongoDB fields
 interface Testimonial {
   _id: string; // MongoDB uses _id
   name: string;
