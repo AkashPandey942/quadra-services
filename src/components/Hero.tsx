@@ -64,7 +64,7 @@ export default function Hero() {
                 transition={{ duration: 0.8 }}
                 sx={{
                   lineHeight: 1.2,
-                  fontSize: { xs: "2rem", md: "3rem" },
+                  fontSize: { xs: "clamp(1.8rem, 6vw, 3.5rem)", md: "3.5rem" },
                 }}
               >
                 We Build{" "}
@@ -125,16 +125,27 @@ export default function Hero() {
                 transition={{ delay: 0.6 }}
                 sx={{ pt: 2 }}
               >
-                <Stack direction="row" spacing={2}>
+                <Stack direction={{ xs: "column", sm: "row" }} spacing={{ xs: 2, sm: 2 }}>
                   <Button
                     variant="contained"
                     size="large"
                     sx={{
-                      px: 4,
+                      px: { xs: 3, sm: 4 },
+                      py: { xs: 1.5, sm: "auto" },
+                      minHeight: { xs: 48, sm: "auto" },
                       background: "linear-gradient(90deg, #E91E63, #6A1B9A)",
                       borderRadius: 2,
                       textTransform: "none",
-                      fontSize: "1rem",
+                      fontSize: { xs: "0.95rem", sm: "1rem" },
+                      fontWeight: 600,
+                      transition: "all 0.3s ease",
+                      "&:hover": {
+                        transform: "translateY(-3px)",
+                        boxShadow: "0 10px 25px rgba(233, 30, 99, 0.4)",
+                      },
+                      "&:active": {
+                        transform: "scale(0.98)",
+                      },
                     }}
                   >
                     Get Free Consultation
@@ -143,15 +154,23 @@ export default function Hero() {
                     variant="outlined"
                     size="large"
                     sx={{
-                      px: 4,
+                      px: { xs: 3, sm: 4 },
+                      py: { xs: 1.5, sm: "auto" },
+                      minHeight: { xs: 48, sm: "auto" },
                       color: "#fff",
                       borderColor: "rgba(255,255,255,0.3)",
                       borderRadius: 2,
                       textTransform: "none",
-                      fontSize: "1rem",
+                      fontSize: { xs: "0.95rem", sm: "1rem" },
+                      fontWeight: 600,
+                      transition: "all 0.3s ease",
                       "&:hover": {
                         borderColor: "#fff",
-                        bgcolor: "rgba(255,255,255,0.05)",
+                        bgcolor: "rgba(255,255,255,0.1)",
+                        transform: "translateY(-3px)",
+                      },
+                      "&:active": {
+                        transform: "scale(0.98)",
                       },
                     }}
                   >

@@ -184,7 +184,7 @@ export default function CTA() {
                                 sx={{
                                     fontWeight: 900,
                                     color: "white",
-                                    fontSize: { xs: "2.5rem", md: "4.5rem" },
+                                    fontSize: { xs: "clamp(1.8rem, 6vw, 4.5rem)", md: "4.5rem" },
                                     lineHeight: 1.1,
                                     mb: 2,
                                     letterSpacing: "-0.02em",
@@ -235,9 +235,9 @@ export default function CTA() {
 
                         <Stack
                             direction={{ xs: "column", sm: "row" }}
-                            spacing={3}
+                            spacing={{ xs: 2, sm: 3 }}
                             justifyContent="center"
-                            alignItems="center"
+                            alignItems={{ xs: "stretch", sm: "center" }}
                         >
                             <MotionButton
                                 whileHover={{ scale: 1.05, y: -5 }}
@@ -246,18 +246,22 @@ export default function CTA() {
                                 size="large"
                                 endIcon={<ArrowForwardIcon />}
                                 sx={{
-                                    px: 6,
-                                    py: 2.2,
+                                    px: { xs: 4, sm: 6 },
+                                    py: { xs: 1.75, sm: 2.2 },
+                                    minHeight: { xs: 48, sm: "auto" },
                                     borderRadius: 3,
                                     bgcolor: currentTheme.primary,
                                     fontWeight: 800,
-                                    fontSize: "1.1rem",
+                                    fontSize: { xs: "1rem", sm: "1.1rem" },
                                     textTransform: "none",
                                     boxShadow: `0 20px 40px -10px ${currentTheme.primary}66`,
                                     "&:hover": {
                                         bgcolor: currentTheme.primary,
                                         filter: "brightness(1.1)",
                                         boxShadow: `0 25px 50px -12px ${currentTheme.primary}88`,
+                                    },
+                                    "&:active": {
+                                        transform: "scale(0.98)"
                                     },
                                     transition: "all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
                                 }}
@@ -272,18 +276,22 @@ export default function CTA() {
                                 size="large"
                                 startIcon={<PhoneIcon />}
                                 sx={{
-                                    px: 6,
-                                    py: 2.2,
+                                    px: { xs: 4, sm: 6 },
+                                    py: { xs: 1.75, sm: 2.2 },
+                                    minHeight: { xs: 48, sm: "auto" },
                                     borderRadius: 3,
                                     borderColor: "rgba(255, 255, 255, 0.15)",
                                     color: "white",
                                     fontWeight: 700,
-                                    fontSize: "1.1rem",
+                                    fontSize: { xs: "1rem", sm: "1.1rem" },
                                     textTransform: "none",
                                     backdropFilter: "blur(10px)",
                                     "&:hover": {
                                         borderColor: "white",
                                         borderWidth: 1,
+                                    },
+                                    "&:active": {
+                                        transform: "scale(0.98)"
                                     },
                                     transition: "all 0.3s ease",
                                 }}

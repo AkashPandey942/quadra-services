@@ -159,7 +159,19 @@ export default function Header() {
 
           {/* MOBILE HAMBURGER */}
           <IconButton
-            sx={{ display: { lg: "none" }, color: "white" }}
+            sx={{ 
+              display: { lg: "none" }, 
+              color: "white",
+              minWidth: 44,
+              minHeight: 44,
+              transition: "all 0.2s ease",
+              "&:hover": {
+                bgcolor: "rgba(255, 255, 255, 0.1)"
+              },
+              "&:active": {
+                bgcolor: "rgba(255, 255, 255, 0.15)"
+              }
+            }}
             onClick={() => setOpen(true)}
           >
             <MenuIcon />
@@ -169,7 +181,7 @@ export default function Header() {
 
       {/* MOBILE DRAWER */}
       <Drawer anchor="right" open={open} onClose={() => setOpen(false)}>
-        <Box sx={{ width: 260 }}>
+        <Box sx={{ width: 260, bgcolor: "#020617", height: "100%" }}>
           {menu.map((item) => (
             <ListItemButton
               key={item.path}
@@ -179,12 +191,18 @@ export default function Header() {
               sx={{
                 fontFamily: "Montserrat, sans-serif",
                 fontWeight: 500,
-                py: 1.5,
+                py: 1.75,
+                px: 2,
+                minHeight: 48,
+                color: "rgba(255, 255, 255, 0.7)",
+                transition: "all 0.2s ease",
                 "&:hover": {
-                  background: "rgba(0,0,0,0.06)",
+                  background: "rgba(255, 255, 255, 0.08)",
+                  color: "white",
                 },
                 "&:active": {
-                  background: "rgba(0,0,0,0.1)",
+                  background: "rgba(255, 255, 255, 0.12)",
+                  color: "white",
                 },
               }}
             >

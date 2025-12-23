@@ -150,14 +150,14 @@ export default function WhyChooseUs() {
             />
 
             <Container maxWidth="xl" sx={{ position: "relative", zIndex: 1, height: "auto", display: "flex", flexDirection: "column" }}>
-                <Box ref={headerRef} sx={{ mb: { xs: 2, md: 3 }, textAlign: "left", pl: { md: 4 }, mt: { xs: 1, md: 0 } }}>
+                <Box ref={headerRef} sx={{ mb: { xs: 6, sm: 7, md: 3 }, textAlign: "left", pl: { xs: 2, sm: 3, md: 4 }, pr: { xs: 2, sm: 3 } }}>
                     <Typography
                         variant="h2"
                         sx={{
                             fontWeight: 900,
-                            mb: 1,
+                            mb: 1.5,
                             color: "white",
-                            fontSize: { xs: "2.2rem", md: "3.5rem" },
+                            fontSize: { xs: "clamp(1.8rem, 5vw, 3.5rem)", md: "3.5rem" },
                             lineHeight: 1.1,
                         }}
                     >
@@ -169,8 +169,8 @@ export default function WhyChooseUs() {
                             color: "rgba(255, 255, 255, 0.5)",
                             maxWidth: 750,
                             fontWeight: 400,
-                            fontSize: { xs: "0.9rem", md: "1.1rem" },
-                            lineHeight: 1.5,
+                            fontSize: { xs: "clamp(0.9rem, 2.5vw, 1.1rem)", md: "1.1rem" },
+                            lineHeight: 1.7,
                         }}
                     >
                         We provide reliable, cost-effective, and cutting-edge solutions to help your business stay ahead in the digital landscape.
@@ -181,19 +181,31 @@ export default function WhyChooseUs() {
                     ref={sectionRef}
                     sx={{
                         display: "flex",
-                        gap: { xs: 3, md: 6 },
+                        gap: { xs: 2.5, sm: 3, md: 6 },
                         position: "relative",
-                        width: "fit-content",
-                        padding: { xs: "10px", md: "20px" },
-                        ml: { xs: 2, md: 4 },
+                        width: { xs: "100%", md: "fit-content" },
+                        padding: { xs: "12px", sm: "16px", md: "20px" },
+                        ml: { xs: 0, md: 4 },
+                        pr: { xs: 2, md: 0 },
+                        // Mobile: horizontal scroll with snap
+                        overflowX: { xs: "auto", md: "visible" },
+                        overflowY: "hidden",
+                        scrollSnapType: { xs: "x mandatory", md: "none" },
+                        WebkitOverflowScrolling: { xs: "touch", md: "auto" },
+                        // Hide scrollbar
+                        msOverflowStyle: "none",
+                        scrollbarWidth: "none",
+                        "&::-webkit-scrollbar": {
+                            display: "none",
+                        },
                     }}
                 >
                     {benefits.map((benefit, index) => (
                         <Card
                             key={index}
                             sx={{
-                                width: { xs: 260, md: 340 },
-                                height: { xs: 360, md: 440 },
+                                width: { xs: 280, sm: 320, md: 340 },
+                                height: { xs: 380, sm: 400, md: 440 },
                                 flexShrink: 0,
                                 bgcolor: "rgba(30, 41, 59, 0.4)",
                                 backdropFilter: "blur(12px)",
@@ -204,18 +216,22 @@ export default function WhyChooseUs() {
                                 overflow: "hidden",
                                 display: "flex",
                                 flexDirection: "column",
+                                // Mobile scroll snap
+                                scrollSnapAlign: { xs: "center", md: "none" },
+                                scrollSnapStop: { xs: "always", md: "auto" },
+                                // Desktop hover
                                 "&:hover": {
-                                    transform: "translateY(-10px) scale(1.02)",
-                                    borderColor: currentTheme.primary,
-                                    bgcolor: "rgba(30, 41, 59, 0.6)",
-                                    boxShadow: `0 12px 25px -5px ${currentTheme.primary}33`,
+                                    transform: { xs: "none", md: "translateY(-10px) scale(1.02)" },
+                                    borderColor: { xs: "inherit", md: currentTheme.primary },
+                                    bgcolor: { xs: "rgba(30, 41, 59, 0.4)", md: "rgba(30, 41, 59, 0.6)" },
+                                    boxShadow: { xs: "none", md: `0 12px 25px -5px ${currentTheme.primary}33` },
                                     "& .icon-wrapper": {
-                                        background: currentTheme.primary,
-                                        color: "white",
-                                        transform: "rotate(360deg) scale(1.1)",
+                                        background: { xs: "inherit", md: currentTheme.primary },
+                                        color: { xs: "inherit", md: "white" },
+                                        transform: { xs: "none", md: "rotate(360deg) scale(1.1)" },
                                     },
                                     "& .bg-glow": {
-                                        opacity: 0.12,
+                                        opacity: { xs: 0, md: 0.12 },
                                     }
                                 },
                             }}

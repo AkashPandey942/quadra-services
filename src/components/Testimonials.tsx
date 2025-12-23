@@ -196,7 +196,7 @@ export default function Testimonials() {
         </Box>
 
         {/* Testimonial Cards */}
-        <Box component="section" sx={{ display: "grid", gap: 4, px: { md: 4 }, gridTemplateColumns: { xs: "1fr", md: "repeat(2, 1fr)" } }}>
+        <Box component="section" sx={{ display: "grid", gap: { xs: 3, sm: 3.5, md: 4 }, px: { xs: 2, sm: 2, md: 4 }, gridTemplateColumns: { xs: "1fr", sm: "repeat(2, 1fr)", md: "repeat(2, 1fr)" } }}>
           {loading ? (
             <Box sx={{ gridColumn: "1 / -1", textAlign: "center", py: 8 }}>
               <Typography sx={{ color: "rgba(255, 255, 255, 0.5)" }}>Loading reviews...</Typography>
@@ -228,12 +228,12 @@ export default function Testimonials() {
                       overflow: "visible",
                       transition: "all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
                       "&:hover": {
-                        transform: "translateY(-10px)",
+                        transform: { xs: "none", md: "translateY(-10px)" },
                         borderColor: currentTheme.primary,
-                        boxShadow: `0 20px 40px -10px ${currentTheme.primary}33`,
+                        boxShadow: { xs: "none", md: `0 20px 40px -10px ${currentTheme.primary}33` },
                         "& .quote-icon": {
-                          bgcolor: currentTheme.primary,
-                          transform: "scale(1.1) rotate(15deg)",
+                          bgcolor: { xs: "rgba(255, 255, 255, 0.05)", md: currentTheme.primary },
+                          transform: { xs: "none", md: "scale(1.1) rotate(15deg)" },
                         }
                       },
                     }}
