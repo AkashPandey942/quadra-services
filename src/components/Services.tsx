@@ -93,7 +93,8 @@ export default function Services() {
     }, []);
 
     useLayoutEffect(() => {
-        if (!triggerRef.current || !sectionRef.current) return;
+        // Only apply GSAP animations on desktop (md and above)
+        if (isMobile || !triggerRef.current || !sectionRef.current) return;
 
         const ctx = gsap.context(() => {
             const getScrollAmount = () => {
@@ -105,7 +106,7 @@ export default function Services() {
                 scrollTrigger: {
                     trigger: triggerRef.current,
                     start: "top top",
-                    end: () => `+=${Math.abs(getScrollAmount()) + 1000}`, // Increased scroll distance for longer delay
+                    end: () => `+=${Math.abs(getScrollAmount()) + 1000}`,
                     scrub: 0.5,
                     pin: true,
                     anticipatePin: 1,
@@ -113,10 +114,7 @@ export default function Services() {
                 },
             });
 
-            // Step 1: Extended pause for the header
             tl.to({}, { duration: 1 });
-
-            // Step 2: Animate the horizontal track
             tl.to(sectionRef.current, {
                 x: getScrollAmount,
                 ease: "none",
@@ -136,12 +134,13 @@ export default function Services() {
                 overflow: "hidden",
                 position: "relative",
                 zIndex: 2,
-                minHeight: "100vh",
+                minHeight: { xs: "auto", md: "100vh" },
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
                 justifyContent: "flex-start",
-                pt: { xs: 2, md: 3 }, // Significantly reduced top padding
+                pt: { xs: 6, sm: 8, md: 3 },
+                pb: { xs: 4, md: 8 },
             }}
         >
             {/* Background Decorative Elements */}
@@ -171,14 +170,14 @@ export default function Services() {
             />
 
             <Container maxWidth="xl" sx={{ position: "relative", zIndex: 1, height: "auto", display: "flex", flexDirection: "column" }}>
-                <Box ref={headerRef} sx={{ mb: { xs: 2, md: 3 }, textAlign: "left", pl: { md: 4 }, mt: { xs: 1, md: 0 } }}>
+                <Box ref={headerRef} sx={{ mb: { xs: 4, sm: 5, md: 3 }, textAlign: "left", pl: { xs: 2, sm: 3, md: 4 }, pr: { xs: 2, sm: 3 } }}>
                     <Typography
                         variant="h2"
                         sx={{
                             fontWeight: 900,
-                            mb: 1,
+                            mb: 1.5,
                             color: "white",
-                            fontSize: { xs: "2.2rem", md: "3.5rem" }, // Slightly smaller header to reclaim space
+                            fontSize: { xs: "clamp(1.8rem, 5vw, 3.5rem)", md: "3.5rem" },
                             lineHeight: 1.1,
                         }}
                     >
@@ -190,8 +189,8 @@ export default function Services() {
                             color: "rgba(255, 255, 255, 0.5)",
                             maxWidth: 750,
                             fontWeight: 400,
-                            fontSize: { xs: "0.9rem", md: "1.1rem" },
-                            lineHeight: 1.5,
+                            fontSize: { xs: "clamp(0.9rem, 2.5vw, 1.1rem)", md: "1.1rem" },
+                            lineHeight: 1.6,
                         }}
                     >
                         We merge creativity with technical excellence to build future-ready digital products that drive growth and innovation.
@@ -202,19 +201,31 @@ export default function Services() {
                     ref={sectionRef}
                     sx={{
                         display: "flex",
-                        gap: { xs: 3, md: 6 }, // Increased gap for more spacing
+                        gap: { xs: 2.5, sm: 3, md: 6 },
                         position: "relative",
-                        width: "fit-content",
-                        padding: { xs: "10px", md: "20px" },
-                        ml: { xs: 2, md: 4 },
+                        width: { xs: "100%", md: "fit-content" },
+                        padding: { xs: "12px", sm: "16px", md: "20px" },
+                        ml: { xs: 0, md: 4 },
+                        pr: { xs: 2, md: 0 },
+                        // Mobile: horizontal scroll with snap
+                        overflowX: { xs: "auto", md: "visible" },
+                        overflowY: "hidden",
+                        scrollSnapType: { xs: "x mandatory", md: "none" },
+                        WebkitOverflowScrolling: { xs: "touch", md: "auto" },
+                        // Hide scrollbar on mobile
+                        msOverflowStyle: "none",
+                        scrollbarWidth: "none",
+                        "&::-webkit-scrollbar": {
+                            display: "none",
+                        },
                     }}
                 >
                     {services.map((service, index) => (
                         <Card
                             key={index}
                             sx={{
-                                width: { xs: 260, md: 340 }, // Further reduced card size
-                                height: { xs: 360, md: 440 },
+                                width: { xs: 280, sm: 320, md: 340 },
+                                height: { xs: 380, sm: 400, md: 440 },
                                 flexShrink: 0,
                                 bgcolor: "rgba(30, 41, 59, 0.4)",
                                 backdropFilter: "blur(12px)",
@@ -225,18 +236,22 @@ export default function Services() {
                                 overflow: "hidden",
                                 display: "flex",
                                 flexDirection: "column",
+                                // Mobile scroll snap
+                                scrollSnapAlign: { xs: "center", md: "none" },
+                                scrollSnapStop: { xs: "always", md: "auto" },
+                                // Desktop hover
                                 "&:hover": {
-                                    transform: "translateY(-10px) scale(1.02)",
-                                    borderColor: currentTheme.primary,
-                                    bgcolor: "rgba(30, 41, 59, 0.6)",
-                                    boxShadow: `0 12px 25px -5px ${currentTheme.primary}33`,
+                                    transform: { xs: "none", md: "translateY(-10px) scale(1.02)" },
+                                    borderColor: { xs: "inherit", md: currentTheme.primary },
+                                    bgcolor: { xs: "rgba(30, 41, 59, 0.4)", md: "rgba(30, 41, 59, 0.6)" },
+                                    boxShadow: { xs: "none", md: `0 12px 25px -5px ${currentTheme.primary}33` },
                                     "& .icon-wrapper": {
-                                        background: currentTheme.primary,
-                                        color: "white",
-                                        transform: "rotate(360deg) scale(1.1)",
+                                        background: { xs: "inherit", md: currentTheme.primary },
+                                        color: { xs: "inherit", md: "white" },
+                                        transform: { xs: "none", md: "rotate(360deg) scale(1.1)" },
                                     },
                                     "& .bg-glow": {
-                                        opacity: 0.12,
+                                        opacity: { xs: 0, md: 0.12 },
                                     }
                                 },
                             }}
@@ -256,12 +271,12 @@ export default function Services() {
                                 }}
                             />
 
-                            <CardContent sx={{ p: { xs: 2.5, md: 4 }, height: "100%", display: "flex", flexDirection: "column", zIndex: 1 }}>
+                            <CardContent sx={{ p: { xs: 2.5, sm: 3, md: 4 }, height: "100%", display: "flex", flexDirection: "column", zIndex: 1 }}>
                                 <Box
                                     className="icon-wrapper"
                                     sx={{
-                                        width: { xs: 45, md: 60 },
-                                        height: { xs: 45, md: 60 },
+                                        width: { xs: 48, sm: 52, md: 60 },
+                                        height: { xs: 48, sm: 52, md: 60 },
                                         borderRadius: 3.5,
                                         display: "flex",
                                         alignItems: "center",
@@ -272,7 +287,7 @@ export default function Services() {
                                         transition: "all 0.6s ease",
                                     }}
                                 >
-                                    <service.icon sx={{ fontSize: { xs: 24, md: 30 } }} />
+                                    <service.icon sx={{ fontSize: { xs: 26, sm: 28, md: 30 } }} />
                                 </Box>
 
                                 <Typography
@@ -281,8 +296,9 @@ export default function Services() {
                                         color: "white",
                                         fontWeight: 800,
                                         mb: 1.2,
-                                        fontSize: { xs: "1.2rem", md: "1.5rem" },
+                                        fontSize: { xs: "clamp(1.1rem, 2.5vw, 1.5rem)", md: "1.5rem" },
                                         letterSpacing: "-0.01em",
+                                        lineHeight: 1.3,
                                     }}
                                 >
                                     {service.title}
@@ -293,15 +309,15 @@ export default function Services() {
                                     sx={{
                                         color: "rgba(255, 255, 255, 0.55)",
                                         mb: 2.5,
-                                        lineHeight: 1.5,
-                                        fontSize: { xs: "0.85rem", md: "0.95rem" },
+                                        lineHeight: 1.6,
+                                        fontSize: { xs: "clamp(0.8rem, 2vw, 0.95rem)", md: "0.95rem" },
                                         flexGrow: 1,
                                     }}
                                 >
                                     {service.description}
                                 </Typography>
 
-                                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.8, mb: 2.5 }}>
+                                <Box sx={{ display: "flex", flexWrap: "wrap", gap: { xs: 0.7, md: 0.8 }, mb: 2.5 }}>
                                     {service.features.map((feature, idx) => (
                                         <Chip
                                             key={idx}
@@ -313,7 +329,7 @@ export default function Services() {
                                                 border: "1px solid rgba(255, 255, 255, 0.08)",
                                                 borderRadius: 2,
                                                 fontWeight: 500,
-                                                fontSize: "0.7rem",
+                                                fontSize: "clamp(0.65rem, 1.5vw, 0.7rem)",
                                                 "&:hover": {
                                                     bgcolor: "rgba(255, 255, 255, 0.08)",
                                                 }
@@ -322,9 +338,9 @@ export default function Services() {
                                     ))}
                                 </Box>
 
-                                <Stack direction="row" alignItems="center" spacing={1} sx={{ color: currentTheme.primary, cursor: "pointer", fontWeight: 700, "&:hover": { "& .arrow": { transform: "translateX(4px)" } } }}>
-                                    <Typography variant="button" sx={{ textTransform: 'none', fontSize: "0.85rem" }}>Learn More</Typography>
-                                    <ArrowForward className="arrow" fontSize="small" sx={{ transition: "transform 0.3s ease" }} />
+                                <Stack direction="row" alignItems="center" spacing={1} sx={{ color: currentTheme.primary, cursor: "pointer", fontWeight: 700, fontSize: { xs: "0.8rem", md: "0.85rem" }, "&:hover": { "& .arrow": { transform: { xs: "none", md: "translateX(4px)" } } } }}>
+                                    <Typography variant="button" sx={{ textTransform: 'none' }}>Learn More</Typography>
+                                    <ArrowForward className="arrow" fontSize="small" sx={{ transition: "transform 0.3s ease", display: { xs: "none", md: "block" } }} />
                                 </Stack>
                             </CardContent>
                         </Card>
@@ -335,19 +351,19 @@ export default function Services() {
             {/* Scroll Indicator */}
             <Box
                 sx={{
-                    position: "absolute",
-                    bottom: 20,
-                    left: "50%",
-                    transform: "translateX(-50%)",
-                    display: { xs: "none", md: "flex" },
-                    flexDirection: "column",
+                    position: "relative",
+                    mt: { xs: 3, md: 0 },
+                    display: "flex",
+                    justifyContent: "center",
                     alignItems: "center",
-                    gap: 1,
-                    opacity: 0.3,
+                    gap: 1.5,
+                    opacity: 0.4,
+                    fontSize: { xs: "0.7rem", md: "0.75rem" },
                 }}
             >
-                <Typography variant="caption" sx={{ color: "white", letterSpacing: 3, fontWeight: 600, fontSize: "0.65rem" }}>SCROLL TO EXPLORE</Typography>
-                <Box sx={{ width: 1, height: 30, borderLeft: "1px solid white", opacity: 0.3 }} />
+                <Typography variant="caption" sx={{ color: "white", letterSpacing: 2, fontWeight: 600 }}>
+                    {isMobile ? "SCROLL HORIZONTALLY" : "SCROLL TO EXPLORE"}
+                </Typography>
             </Box>
         </Box>
     );

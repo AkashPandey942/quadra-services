@@ -85,7 +85,7 @@ export default function FAQ() {
                             fontWeight: 900,
                             mb: 1.5,
                             color: "white",
-                            fontSize: { xs: "2.2rem", md: "3rem" },
+                            fontSize: { xs: "clamp(1.8rem, 5vw, 3rem)", md: "3rem" },
                             lineHeight: 1.1,
                         }}
                     >

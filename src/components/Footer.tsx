@@ -45,7 +45,7 @@ export default function Footer() {
       }}
     >
       <Container maxWidth="xl">
-        <Box sx={{ display: 'grid', gap: 6, mb: 8, gridTemplateColumns: { xs: '1fr', md: '4fr 2.5fr 2.5fr 3fr' } }}>
+        <Box sx={{ display: 'grid', gap: { xs: 4, md: 6 }, mb: 8, gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr', md: '4fr 2.5fr 2.5fr 3fr' } }}>
           {/* Column 1: Brand & Social */}
           <Box>
             <Box
@@ -89,6 +89,8 @@ export default function Footer() {
                   component="a"
                   href={social.link}
                   sx={{
+                    minWidth: 44,
+                    minHeight: 44,
                     color: "rgba(255, 255, 255, 0.4)",
                     bgcolor: "rgba(255, 255, 255, 0.03)",
                     transition: "all 0.3s ease",
@@ -97,6 +99,9 @@ export default function Footer() {
                       bgcolor: currentTheme.primary,
                       transform: "translateY(-4px)",
                       boxShadow: `0 8px 20px ${currentTheme.primary}44`,
+                    },
+                    "&:active": {
+                      transform: "scale(0.95)",
                     },
                   }}
                 >
@@ -198,21 +203,23 @@ export default function Footer() {
             display: "flex",
             flexDirection: { xs: "column", sm: "row" },
             justifyContent: "space-between",
-            alignItems: "center",
-            gap: 2,
+            alignItems: { xs: "flex-start", sm: "center" },
+            gap: { xs: 3, sm: 2 },
+            py: 2,
+            px: { xs: 1, sm: 0 },
           }}
         >
-          <Typography variant="caption" sx={{ color: "rgba(255, 255, 255, 0.3)" }}>
+          <Typography variant="caption" sx={{ color: "rgba(255, 255, 255, 0.3)", fontSize: "0.8rem", lineHeight: 1.5 }}>
             © {new Date().getFullYear()} ApexNexon Technologies. All Rights Reserved.
           </Typography>
-          <Stack direction="row" spacing={3}>
-            <MuiLink href="#" underline="none" sx={{ color: "rgba(255, 255, 255, 0.3)", fontSize: "0.75rem", "&:hover": { color: "white" } }}>
+          <Stack direction={{ xs: "column", sm: "row" }} spacing={{ xs: 1.5, sm: 3 }}>
+            <MuiLink href="#" underline="none" sx={{ color: "rgba(255, 255, 255, 0.3)", fontSize: "0.8rem", transition: "color 0.2s ease", "&:hover": { color: "white" }, minHeight: 32, display: "flex", alignItems: "center" }}>
               Privacy Policy
             </MuiLink>
-            <MuiLink href="#" underline="none" sx={{ color: "rgba(255, 255, 255, 0.3)", fontSize: "0.75rem", "&:hover": { color: "white" } }}>
+            <MuiLink href="#" underline="none" sx={{ color: "rgba(255, 255, 255, 0.3)", fontSize: "0.8rem", transition: "color 0.2s ease", "&:hover": { color: "white" }, minHeight: 32, display: "flex", alignItems: "center" }}>
               Terms of Service
             </MuiLink>
-            <MuiLink href="#" underline="none" sx={{ color: "rgba(255, 255, 255, 0.3)", fontSize: "0.75rem", "&:hover": { color: "white" } }}>
+            <MuiLink href="#" underline="none" sx={{ color: "rgba(255, 255, 255, 0.3)", fontSize: "0.8rem", transition: "color 0.2s ease", "&:hover": { color: "white" }, minHeight: 32, display: "flex", alignItems: "center" }}>
               Cookie Policy
             </MuiLink>
           </Stack>

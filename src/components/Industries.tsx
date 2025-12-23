@@ -120,6 +120,15 @@ export default function Industries() {
             duration: 0.5,
             ease: "power2.out",
         });
+
+        // Animate chips with stagger on hover
+        const chips = card.querySelectorAll(".reveal-chips .MuiChip-root");
+        gsap.to(chips, {
+            y: -4,
+            duration: 0.3,
+            stagger: 0.05,
+            ease: "back.out(1.5)",
+        });
     };
 
     const handleMouseLeave = (index: number) => {
@@ -132,6 +141,15 @@ export default function Industries() {
             scale: 1,
             duration: 0.8,
             ease: "elastic.out(1, 0.5)",
+        });
+
+        // Reset chips position on mouse leave
+        const chips = card.querySelectorAll(".reveal-chips .MuiChip-root");
+        gsap.to(chips, {
+            y: 0,
+            duration: 0.5,
+            stagger: -0.05,
+            ease: "back.in(1.5)",
         });
     };
 
@@ -164,14 +182,14 @@ export default function Industries() {
             />
 
             <Container maxWidth="xl" sx={{ position: "relative", zIndex: 1 }}>
-                <Box sx={{ mb: { xs: 6, md: 8 }, textAlign: "left", pl: { md: 4 } }}>
+                <Box sx={{ mb: { xs: 6, sm: 7, md: 8 }, textAlign: "left", pl: { xs: 2, sm: 3, md: 4 }, pr: { xs: 2, sm: 3 } }}>
                     <Typography
                         variant="h2"
                         sx={{
                             fontWeight: 900,
                             mb: 1.5,
                             color: "white",
-                            fontSize: { xs: "2.2rem", md: "3.5rem" },
+                            fontSize: { xs: "clamp(1.8rem, 5vw, 3.5rem)", md: "3.5rem" },
                             lineHeight: 1.1,
                         }}
                     >
@@ -183,8 +201,8 @@ export default function Industries() {
                             color: "rgba(255, 255, 255, 0.5)",
                             maxWidth: 850,
                             fontWeight: 400,
-                            fontSize: { xs: "0.95rem", md: "1.15rem" },
-                            lineHeight: 1.6,
+                            fontSize: { xs: "clamp(0.9rem, 2.5vw, 1.15rem)", md: "1.15rem" },
+                            lineHeight: 1.7,
                         }}
                     >
                         We leverage deep domain expertise to build transformative digital experiences tailored to the unique challenges of your sector.
@@ -200,14 +218,14 @@ export default function Industries() {
                             sm: "repeat(2, 1fr)",
                             md: "repeat(4, 1fr)"
                         },
-                        gap: 3.5,
-                        px: { md: 4 },
+                        gap: { xs: 2.5, sm: 3, md: 3.5 },
+                        px: { xs: 2, sm: 2, md: 4 },
                     }}
                 >
                     {industries.map((industry, index) => (
                         <Box
                             key={index}
-                            ref={(el: HTMLDivElement | null) => (cardsRef.current[index] = el)}
+                            ref={(el: HTMLDivElement | null) => { cardsRef.current[index] = el; }}
                             onMouseMove={(e) => handleMouseMove(e, index)}
                             onMouseLeave={() => handleMouseLeave(index)}
                             style={{ transformStyle: "preserve-3d" }}
@@ -224,38 +242,38 @@ export default function Industries() {
                                     overflow: "hidden",
                                     cursor: "pointer",
                                     "&:hover": {
-                                        borderColor: currentTheme.primary,
-                                        boxShadow: `0 20px 40px -10px ${currentTheme.primary}44`,
+                                        borderColor: { xs: "inherit", md: currentTheme.primary },
+                                        boxShadow: { xs: "none", md: `0 20px 40px -10px ${currentTheme.primary}44` },
                                         "& .reveal-chips": {
-                                            transform: "translateY(0)",
-                                            opacity: 1,
+                                            transform: { xs: "translateY(0)", md: "translateY(0)" },
+                                            opacity: { xs: 1, md: 1 },
                                         },
                                         "& .industry-icon": {
-                                            color: "white",
-                                            background: currentTheme.primary,
-                                            transform: "translateZ(30px) scale(1.1)",
+                                            color: { xs: "inherit", md: "white" },
+                                            background: { xs: "inherit", md: currentTheme.primary },
+                                            transform: { xs: "none", md: "translateZ(30px) scale(1.1)" },
                                         }
                                     },
                                 }}
                             >
-                                <CardContent sx={{ p: 4, textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center" }}>
+                                <CardContent sx={{ p: { xs: 3, sm: 3.5, md: 4 }, textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center" }}>
                                     <Box
                                         className="industry-icon"
                                         sx={{
-                                            width: 65,
-                                            height: 65,
+                                            width: { xs: 56, sm: 60, md: 65 },
+                                            height: { xs: 56, sm: 60, md: 65 },
                                             borderRadius: 4,
                                             display: "flex",
                                             alignItems: "center",
                                             justifyContent: "center",
                                             bgcolor: "rgba(255, 255, 255, 0.05)",
                                             color: currentTheme.primary,
-                                            mb: 3,
+                                            mb: { xs: 2, md: 3 },
                                             transition: "all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
                                             transform: "translateZ(20px)",
                                         }}
                                     >
-                                        <industry.icon sx={{ fontSize: 32 }} />
+                                        <industry.icon sx={{ fontSize: { xs: 28, md: 32 } }} />
                                     </Box>
 
                                     <Typography
@@ -263,25 +281,26 @@ export default function Industries() {
                                         sx={{
                                             color: "white",
                                             fontWeight: 800,
-                                            mb: 2,
-                                            fontSize: "1.25rem",
+                                            mb: { xs: 1.5, md: 2 },
+                                            fontSize: { xs: "clamp(1.05rem, 2.5vw, 1.25rem)", md: "1.25rem" },
+                                            lineHeight: 1.3,
                                             transform: "translateZ(25px)",
                                         }}
                                     >
                                         {industry.title}
                                     </Typography>
 
-                                    {/* Reveal Chips on Hover */}
+                                    {/* Solutions Chips - Always Visible */}
                                     <Box
                                         className="reveal-chips"
                                         sx={{
                                             display: "flex",
                                             flexDirection: "column",
-                                            gap: 1,
+                                            gap: { xs: 0.8, md: 1 },
                                             width: "100%",
-                                            transform: "translateY(20px)",
-                                            opacity: 0,
-                                            transition: "all 0.4s ease",
+                                            transform: "translateY(0)",
+                                            opacity: 1,
+                                            transition: "all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
                                             transformStyle: "preserve-3d",
                                         }}
                                     >
@@ -296,11 +315,15 @@ export default function Industries() {
                                                     border: "1px solid rgba(255, 255, 255, 0.08)",
                                                     borderRadius: 1.5,
                                                     fontWeight: 500,
-                                                    fontSize: "0.75rem",
+                                                    fontSize: "clamp(0.65rem, 1.5vw, 0.75rem)",
                                                     transform: "translateZ(15px)",
+                                                    transition: "all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
                                                     "&:hover": {
-                                                        bgcolor: "rgba(255, 255, 255, 0.12)",
+                                                        bgcolor: currentTheme.primary + "20",
                                                         color: "white",
+                                                        borderColor: currentTheme.primary + "60",
+                                                        transform: "translateZ(15px) scale(1.08) translateY(-2px)",
+                                                        boxShadow: `0 8px 16px -4px ${currentTheme.primary}40`,
                                                     }
                                                 }}
                                             />
