@@ -1,11 +1,12 @@
 "use client";
 
 import { Box, Container, Typography, Button, Stack, Grid, Tooltip } from "@mui/material";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
 import SmartToyIcon from "@mui/icons-material/SmartToy";
 import DesignServicesIcon from "@mui/icons-material/DesignServices";
 import CodeIcon from "@mui/icons-material/Code";
+import Image from "next/image";
 
 const MotionBox = motion(Box);
 const MotionTypography = motion(Typography);
@@ -24,8 +25,11 @@ const solarSystem = [
 ];
 
 export default function Hero() {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <Box
+      component="section"
       sx={{
         position: "relative",
         overflow: "hidden",
@@ -36,6 +40,8 @@ export default function Hero() {
           "linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #0f0f1a 100%)",
         color: "#fff",
       }}
+      role="banner"
+      aria-labelledby="hero-heading"
     >
       {/* Background Deep Space Glows */}
       <Box
@@ -219,8 +225,17 @@ export default function Hero() {
                   justifyContent: "center",
                   boxShadow: "0 0 50px #FF9800",
                 }}
+                role="img"
+                aria-label="Sun representing the center of our digital universe"
               >
-                <Box component="img" src="/sun.png" alt="Sun" sx={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }} />
+                <Image
+                  src="/sun.png"
+                  alt="Sun - Center of our digital universe"
+                  width={80}
+                  height={80}
+                  style={{ borderRadius: '50%', objectFit: 'cover' }}
+                  priority
+                />
               </MotionBox>
 
               {/* Orbits and Planets */}

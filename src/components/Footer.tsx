@@ -2,6 +2,7 @@
 
 import { Box, Container, Typography, IconButton, Stack, Link as MuiLink, Divider } from "@mui/material";
 import Link from "next/link";
+import Image from "next/image";
 import { useBackground } from "@/context/BackgroundContext";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
@@ -53,17 +54,17 @@ export default function Footer() {
               href="/"
               sx={{ display: "inline-flex", mb: 3 }}
             >
-              <Box
-                component="img"
+              <Image
                 src="/images/ApexNexon.png"
-                alt="Apex Nexon Logo"
-                sx={{
-                  height: 45,
-                  width: "200px",
+                alt="Apex Nexon Logo - Go to homepage"
+                width={200}
+                height={45}
+                style={{
                   objectFit: "cover",
                   objectPosition: "left center",
                   filter: "brightness(1.1)",
                 }}
+                priority={false}
               />
             </Box>
             <Typography
@@ -77,17 +78,21 @@ export default function Footer() {
             >
               Building digital excellence through precision and innovation. We empower businesses with cutting-edge technology solutions that drive growth and transformation in an ever-evolving world.
             </Typography>
-            <Stack direction="row" spacing={1}>
+            <Stack direction="row" spacing={1} role="list" aria-label="Social media links">
               {[
-                { icon: LinkedInIcon, link: "#" },
-                { icon: TwitterIcon, link: "#" },
-                { icon: InstagramIcon, link: "#" },
-                { icon: FacebookIcon, link: "#" },
+                { icon: LinkedInIcon, link: "#", label: "Follow us on LinkedIn" },
+                { icon: TwitterIcon, link: "#", label: "Follow us on Twitter" },
+                { icon: InstagramIcon, link: "#", label: "Follow us on Instagram" },
+                { icon: FacebookIcon, link: "#", label: "Follow us on Facebook" },
               ].map((social, idx) => (
                 <IconButton
                   key={idx}
                   component="a"
                   href={social.link}
+                  aria-label={social.label}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  role="listitem"
                   sx={{
                     minWidth: 44,
                     minHeight: 44,
@@ -102,6 +107,10 @@ export default function Footer() {
                     },
                     "&:active": {
                       transform: "scale(0.95)",
+                    },
+                    "&:focus-visible": {
+                      outline: "2px solid #E91E63",
+                      outlineOffset: 2,
                     },
                   }}
                 >

@@ -8,9 +8,9 @@ import { useState, useEffect, useRef } from "react";
 import { useBackground } from "@/context/BackgroundContext";
 import { Sparkles, Rocket, Zap, Send } from "lucide-react";
 
-const MotionBox = motion(Box);
-const MotionTypography = motion(Typography);
-const MotionButton = motion(Button);
+const MotionBox = motion.create(Box);
+const MotionTypography = motion.create(Typography);
+const MotionButton = motion.create(Button);
 
 export default function CTA() {
     const [mounted, setMounted] = useState(false);
@@ -275,6 +275,15 @@ export default function CTA() {
                                 variant="outlined"
                                 size="large"
                                 startIcon={<PhoneIcon />}
+                                onClick={() => {
+                                    const phoneNumber = "8957257525";
+                                    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+                                    if (isMobile) {
+                                        window.location.href = `tel:${phoneNumber}`;
+                                    } else {
+                                        window.open(`https://wa.me/${phoneNumber}`, '_blank');
+                                    }
+                                }}
                                 sx={{
                                     px: { xs: 4, sm: 6 },
                                     py: { xs: 1.75, sm: 2.2 },
@@ -296,7 +305,7 @@ export default function CTA() {
                                     transition: "all 0.3s ease",
                                 }}
                             >
-                                Talk to an Expert
+                                Book a Call
                             </MotionButton>
                         </Stack>
                     </Box>

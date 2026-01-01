@@ -2,6 +2,7 @@ import TopBar from "@/components/TopBar";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ThemeRegistry from "@/theme/ThemeRegistry";
+import SmoothScrolling from "@/components/SmoothScrolling";
 
 export default function RootLayout({
   children,
@@ -11,12 +12,14 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
-        <ThemeRegistry>
-          <TopBar />
-          <Header />
-          {children}
-          <Footer />
-        </ThemeRegistry>
+        <SmoothScrolling>
+          <ThemeRegistry>
+            <TopBar />
+            <Header />
+            {children}
+            <Footer />
+          </ThemeRegistry>
+        </SmoothScrolling>
       </body>
     </html>
   );

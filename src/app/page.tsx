@@ -1,13 +1,13 @@
 import dynamic from "next/dynamic";
 import Hero from "@/components/Hero";
 
+const Services = dynamic(() => import("@/components/Services"));
+const Technologies = dynamic(() => import("@/components/Technologies"));
+const WhyChooseUs = dynamic(() => import("@/components/WhyChooseUs"));
+const Industries = dynamic(() => import("@/components/Industries"));
+const FAQ = dynamic(() => import("@/components/FAQ"));
+const CTA = dynamic(() => import("@/components/CTA"));
 const Testimonials = dynamic(() => import("@/components/Testimonials"));
-import Services from "@/components/Services";
-import Technologies from "@/components/Technologies";
-import WhyChooseUs from "@/components/WhyChooseUs";
-import Industries from "@/components/Industries";
-import FAQ from "@/components/FAQ";
-import CTA from "@/components/CTA";
 
 export default function HomePage() {
   return (

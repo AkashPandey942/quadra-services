@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Container, Typography, Card, CardContent, Avatar, Rating, Chip, Button, Dialog, DialogTitle, DialogContent, DialogActions, TextField, Stack, useTheme as useMuiTheme } from "@mui/material";
+import { Box, Container, Typography, Card, CardContent, Avatar, Rating, Chip, Button, Dialog, DialogTitle, DialogContent, DialogActions, TextField, Stack } from "@mui/material";
 import { motion } from "framer-motion";
 import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
 import AddIcon from "@mui/icons-material/Add";
@@ -21,7 +21,6 @@ interface Testimonial {
 }
 
 export default function Testimonials() {
-  const muiTheme = useMuiTheme();
   const { currentTheme } = useBackground();
   const [approvedTestimonials, setApprovedTestimonials] = useState<Testimonial[]>([]);
   const [loading, setLoading] = useState(true);
@@ -138,6 +137,7 @@ export default function Testimonials() {
         <Box sx={{ mb: { xs: 6, md: 8 }, textAlign: "left", pl: { md: 4 } }}>
           <Typography
             variant="h2"
+            component="h2"
             sx={{
               fontWeight: 900,
               mb: 1.5,
@@ -151,7 +151,14 @@ export default function Testimonials() {
 
           <Stack direction={{ xs: 'column', sm: 'row' }} spacing={3} alignItems={{ xs: 'flex-start', sm: 'center' }} sx={{ mb: 4 }}>
             <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
-              <Rating value={averageRating} precision={0.1} readOnly size="large" sx={{ color: currentTheme.primary }} />
+              <Rating
+                value={averageRating}
+                precision={0.1}
+                readOnly
+                size="large"
+                sx={{ color: currentTheme.primary }}
+                aria-label={`Average rating: ${averageRating.toFixed(1)} out of 5 stars`}
+              />
               <Typography variant="h6" sx={{ color: "white", fontWeight: 700 }}>
                 {averageRating.toFixed(1)}/5
               </Typography>
@@ -164,6 +171,7 @@ export default function Testimonials() {
                 border: "1px solid rgba(255, 255, 255, 0.1)",
                 fontWeight: 600
               }}
+              aria-label={`${totalReviews} happy clients`}
             />
           </Stack>
 
@@ -172,6 +180,7 @@ export default function Testimonials() {
             size="large"
             startIcon={<AddIcon />}
             onClick={handleOpenDialog}
+            aria-label="Open dialog to share your experience and testimonial"
             sx={{
               px: 4,
               py: 1.5,
@@ -187,6 +196,10 @@ export default function Testimonials() {
                 filter: "brightness(1.1)",
                 transform: "translateY(-3px)",
                 boxShadow: `0 15px 25px -5px ${currentTheme.primary}88`,
+              },
+              "&:focus-visible": {
+                outline: "2px solid #E91E63",
+                outlineOffset: 2,
               },
               transition: "all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
             }}
@@ -318,6 +331,8 @@ export default function Testimonials() {
           onClose={handleCloseDialog}
           maxWidth="sm"
           fullWidth
+          aria-labelledby="testimonial-dialog-title"
+          aria-describedby="testimonial-dialog-description"
           PaperProps={{
             sx: {
               bgcolor: "#0f172a",
@@ -325,15 +340,33 @@ export default function Testimonials() {
               borderRadius: 6,
               border: "1px solid rgba(255, 255, 255, 0.1)",
               boxShadow: `0 24px 48px -12px rgba(0,0,0,0.5)`,
+              maxHeight: { xs: "90vh", sm: "auto" },
+              margin: { xs: 2, sm: "auto" },
             }
           }}
         >
-          <DialogTitle sx={{ fontWeight: 800, fontSize: "1.75rem", color: "white", pt: 4, px: 4 }}>
+          <DialogTitle
+            id="testimonial-dialog-title"
+            sx={{
+              fontWeight: 800,
+              fontSize: { xs: "1.5rem", sm: "1.75rem" },
+              color: "white",
+              pt: 4,
+              px: 4
+            }}
+          >
             Share Your Experience
           </DialogTitle>
           <DialogContent sx={{ px: 4 }}>
-            <Typography sx={{ color: "rgba(255, 255, 255, 0.5)", mb: 4 }}>
-              Your feedback help us build better solutions for the community.
+            <Typography
+              id="testimonial-dialog-description"
+              sx={{
+                color: "rgba(255, 255, 255, 0.5)",
+                mb: 4,
+                fontSize: { xs: "0.9rem", sm: "1rem" }
+              }}
+            >
+              Your feedback helps us build better solutions for the community.
             </Typography>
             <Stack spacing={3}>
               <TextField
@@ -342,9 +375,14 @@ export default function Testimonials() {
                 variant="filled"
                 value={newReview.name}
                 onChange={(e) => setNewReview({ ...newReview, name: e.target.value })}
+                required
+                aria-required="true"
                 sx={{
                   "& .MuiFilledInput-root": { bgcolor: "rgba(255, 255, 255, 0.03)", color: "white" },
-                  "& .MuiInputLabel-root": { color: "rgba(255, 255, 255, 0.4)" }
+                  "& .MuiInputLabel-root": { color: "rgba(255, 255, 255, 0.4)" },
+                  "& .MuiFilledInput-root.Mui-focused": {
+                    bgcolor: "rgba(255, 255, 255, 0.05)",
+                  }
                 }}
               />
               <Box sx={{ display: "grid", gap: 2, gridTemplateColumns: { xs: "1fr", sm: "repeat(2, 1fr)" } }}>
@@ -355,9 +393,14 @@ export default function Testimonials() {
                     variant="filled"
                     value={newReview.role}
                     onChange={(e) => setNewReview({ ...newReview, role: e.target.value })}
+                    required
+                    aria-required="true"
                     sx={{
                       "& .MuiFilledInput-root": { bgcolor: "rgba(255, 255, 255, 0.03)", color: "white" },
-                      "& .MuiInputLabel-root": { color: "rgba(255, 255, 255, 0.4)" }
+                      "& .MuiInputLabel-root": { color: "rgba(255, 255, 255, 0.4)" },
+                      "& .MuiFilledInput-root.Mui-focused": {
+                        bgcolor: "rgba(255, 255, 255, 0.05)",
+                      }
                     }}
                   />
                 </Box>
@@ -368,9 +411,14 @@ export default function Testimonials() {
                     variant="filled"
                     value={newReview.company}
                     onChange={(e) => setNewReview({ ...newReview, company: e.target.value })}
+                    required
+                    aria-required="true"
                     sx={{
                       "& .MuiFilledInput-root": { bgcolor: "rgba(255, 255, 255, 0.03)", color: "white" },
-                      "& .MuiInputLabel-root": { color: "rgba(255, 255, 255, 0.4)" }
+                      "& .MuiInputLabel-root": { color: "rgba(255, 255, 255, 0.4)" },
+                      "& .MuiFilledInput-root.Mui-focused": {
+                        bgcolor: "rgba(255, 255, 255, 0.05)",
+                      }
                     }}
                   />
                 </Box>
@@ -383,9 +431,14 @@ export default function Testimonials() {
                 variant="filled"
                 value={newReview.testimonial}
                 onChange={(e) => setNewReview({ ...newReview, testimonial: e.target.value })}
+                required
+                aria-required="true"
                 sx={{
                   "& .MuiFilledInput-root": { bgcolor: "rgba(255, 255, 255, 0.03)", color: "white" },
-                  "& .MuiInputLabel-root": { color: "rgba(255, 255, 255, 0.4)" }
+                  "& .MuiInputLabel-root": { color: "rgba(255, 255, 255, 0.4)" },
+                  "& .MuiFilledInput-root.Mui-focused": {
+                    bgcolor: "rgba(255, 255, 255, 0.05)",
+                  }
                 }}
               />
               <Box>
@@ -395,12 +448,22 @@ export default function Testimonials() {
                   onChange={(e, value) => setNewReview({ ...newReview, rating: value || 5 })}
                   size="large"
                   sx={{ color: currentTheme.primary }}
+                  aria-label="Select your rating out of 5 stars"
                 />
               </Box>
             </Stack>
           </DialogContent>
-          <DialogActions sx={{ p: 4, gap: 2 }}>
-            <Button onClick={handleCloseDialog} sx={{ color: "rgba(255, 255, 255, 0.5)", fontWeight: 600, textTransform: 'none' }}>
+          <DialogActions sx={{ p: 4, gap: 2, flexDirection: { xs: "column", sm: "row" } }}>
+            <Button
+              onClick={handleCloseDialog}
+              sx={{
+                color: "rgba(255, 255, 255, 0.5)",
+                fontWeight: 600,
+                textTransform: 'none',
+                order: { xs: 2, sm: 1 },
+                width: { xs: "100%", sm: "auto" }
+              }}
+            >
               Cancel
             </Button>
             <Button
@@ -412,7 +475,13 @@ export default function Testimonials() {
                 bgcolor: currentTheme.primary,
                 fontWeight: 700,
                 textTransform: 'none',
-                "&:hover": { bgcolor: currentTheme.primary, filter: "brightness(1.1)" }
+                "&:hover": { bgcolor: currentTheme.primary, filter: "brightness(1.1)" },
+                "&:focus-visible": {
+                  outline: "2px solid #E91E63",
+                  outlineOffset: 2,
+                },
+                order: { xs: 1, sm: 2 },
+                width: { xs: "100%", sm: "auto" }
               }}
             >
               Submit Review

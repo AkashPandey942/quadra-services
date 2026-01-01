@@ -13,12 +13,13 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Image from "next/image";
 
 const menu = [
   { label: "About", path: "/about" },
   { label: "Services", path: "/services" },
-  { label: "Projects", path: "/projects" },
+  { label: "Solutions", path: "/solutions" },
   { label: "Blogs", path: "/blogs" },
   { label: "Contact", path: "/contact" },
 ];
@@ -110,6 +111,9 @@ export default function Header() {
             </Box>
           </Box>
 
+          {/* MOBILE SPACER - Push hamburger to right */}
+          <Box sx={{ flexGrow: 1, display: { xs: "block", md: "none" } }} />
+
           {/* DESKTOP NAV */}
           <Box
             className="navbar"
@@ -159,8 +163,11 @@ export default function Header() {
 
           {/* MOBILE HAMBURGER */}
           <IconButton
-            sx={{ 
-              display: { lg: "none" }, 
+            aria-label={open ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={open}
+            aria-controls="mobile-navigation"
+            sx={{
+              display: { lg: "none" },
               color: "white",
               minWidth: 44,
               minHeight: 44,
@@ -170,6 +177,10 @@ export default function Header() {
               },
               "&:active": {
                 bgcolor: "rgba(255, 255, 255, 0.15)"
+              },
+              "&:focus-visible": {
+                outline: "2px solid #E91E63",
+                outlineOffset: 2,
               }
             }}
             onClick={() => setOpen(true)}
