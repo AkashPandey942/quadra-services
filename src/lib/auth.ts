@@ -1,4 +1,19 @@
-export const isAdmin = () => {
-  if (typeof window === "undefined") return false;
-  return localStorage.getItem("admin") === "true";
-};
+// src/lib/auth.ts
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+
+/**
+ * Helper that returns an object indicating whether the request is from an
+ * authenticated admin (or any logged‑in user if you don’t have roles).
+ */
+export async function requireAuth() {
+  const session = await getServerSession(authOptions);
+  if (!session?.user?.email) {
+    return { authorized: false, message: "Unauthorized" } as const;
+  }
+  // If you store a role on the user document you can enforce admin here:
+  // if ((session.user as any).role !== "admin") {
+  //   return { authorized: false, message: "Forbidden" } as const;
+  // }
+  return { authorized: true, session } as const;
+}

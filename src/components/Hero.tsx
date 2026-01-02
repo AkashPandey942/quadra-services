@@ -201,8 +201,8 @@ export default function Hero() {
             <Box
               sx={{
                 position: "relative",
-                width: { xs: 350, md: 400 }, // Responsive size
-                height: { xs: 350, md: 400 },
+                width: { xs: "min(350px, 90vw)", md: 400 }, // Responsive size
+                height: { xs: "min(350px, 90vw)", md: 400 },
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",

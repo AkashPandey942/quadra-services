@@ -140,7 +140,7 @@ export default function CTA() {
                         position: "relative",
                         borderRadius: 10,
                         overflow: "hidden",
-                        p: { xs: 6, md: 10 },
+                        p: { xs: 4, sm: 6, md: 10 },
                         textAlign: "center",
                         bgcolor: "rgba(15, 23, 42, 0.3)",
                         backdropFilter: "blur(20px)",

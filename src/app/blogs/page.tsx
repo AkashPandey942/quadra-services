@@ -7,6 +7,9 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { useBackground } from "@/context/BackgroundContext";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 const MotionCard = motion(Card);
 
 interface Blog {
@@ -38,7 +41,7 @@ export default function BlogsPage() {
 
   const fetchBlogs = async () => {
     try {
-      const response = await fetch("/api/blogs?status=published");
+      const response = await fetch("/api/blogs?status=published", { cache: "no-store" });
       const data = await response.json();
       if (data.success) {
         setBlogs(data.blogs);

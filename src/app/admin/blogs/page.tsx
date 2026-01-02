@@ -95,17 +95,18 @@ export default function AdminBlogsPage() {
     return (
         <Box sx={{ bgcolor: "#020617", minHeight: "100vh" }}>
             {/* Header */}
+            {/* Header */}
             <AppBar position="static" sx={{ bgcolor: "rgba(30, 41, 59, 0.8)", backdropFilter: "blur(12px)" }}>
                 <Toolbar>
-                    <Article sx={{ mr: 2 }} />
-                    <Typography variant="h6" sx={{ flexGrow: 1, fontWeight: 700 }}>
+                    <Article sx={{ mr: 2, color: "white" }} />
+                    <Typography variant="h6" sx={{ flexGrow: 1, fontWeight: 700, color: "white" }}>
                         Blog Management
                     </Typography>
                     <Button
                         color="inherit"
                         startIcon={<Logout />}
                         onClick={handleLogout}
-                        sx={{ textTransform: "none" }}
+                        sx={{ textTransform: "none", color: "white" }}
                     >
                         Logout
                     </Button>
@@ -117,15 +118,15 @@ export default function AdminBlogsPage() {
                 <Box sx={{ display: "flex", gap: 2, mb: 4 }}>
                     <Paper sx={{ flex: 1, p: 3, bgcolor: "rgba(30, 41, 59, 0.4)", backdropFilter: "blur(12px)", border: "1px solid rgba(255, 255, 255, 0.08)" }}>
                         <Typography variant="h4" sx={{ fontWeight: 700, color: "white" }}>{stats.total}</Typography>
-                        <Typography variant="body2" sx={{ color: "rgba(255, 255, 255, 0.6)" }}>Total Posts</Typography>
+                        <Typography variant="body2" sx={{ color: "rgba(255, 255, 255, 0.8)" }}>Total Posts</Typography>
                     </Paper>
                     <Paper sx={{ flex: 1, p: 3, bgcolor: "rgba(30, 41, 59, 0.4)", backdropFilter: "blur(12px)", border: "1px solid rgba(255, 255, 255, 0.08)" }}>
                         <Typography variant="h4" sx={{ fontWeight: 700, color: "#22C55E" }}>{stats.published}</Typography>
-                        <Typography variant="body2" sx={{ color: "rgba(255, 255, 255, 0.6)" }}>Published</Typography>
+                        <Typography variant="body2" sx={{ color: "rgba(255, 255, 255, 0.8)" }}>Published</Typography>
                     </Paper>
                     <Paper sx={{ flex: 1, p: 3, bgcolor: "rgba(30, 41, 59, 0.4)", backdropFilter: "blur(12px)", border: "1px solid rgba(255, 255, 255, 0.08)" }}>
                         <Typography variant="h4" sx={{ fontWeight: 700, color: "#F59E0B" }}>{stats.drafts}</Typography>
-                        <Typography variant="body2" sx={{ color: "rgba(255, 255, 255, 0.6)" }}>Drafts</Typography>
+                        <Typography variant="body2" sx={{ color: "rgba(255, 255, 255, 0.8)" }}>Drafts</Typography>
                     </Paper>
                 </Box>
 

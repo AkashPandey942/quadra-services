@@ -97,28 +97,39 @@ export default function Services() {
         if (isMobile || !triggerRef.current || !sectionRef.current) return;
 
         const ctx = gsap.context(() => {
+            const cardsContainer = sectionRef.current;
+            if (!cardsContainer) return;
+
             const getScrollAmount = () => {
-                const sectionWidth = sectionRef.current?.scrollWidth || 0;
-                return -(sectionWidth - window.innerWidth + 150);
+                const sectionWidth = cardsContainer.scrollWidth;
+                const viewportWidth = window.innerWidth;
+                // Calculate exactly how much to move left to show the last card fully
+                // We assume there is some padding-right, so we just subtract viewport width
+                return -(sectionWidth - viewportWidth);
             };
+
+            const scrollAmount = getScrollAmount();
+            // If content fits (scrollAmount is visible or positive), no need to scroll
+            if (scrollAmount >= 0) return;
 
             const tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: triggerRef.current,
                     start: "top top",
-                    end: () => `+=${Math.abs(getScrollAmount()) + 1000}`,
-                    scrub: 0.5,
+                    // Map the scroll distance 1:1 or slightly slower (e.g. 1.2x) for better readability
+                    // Removing the fixed +1000 buffer which caused the "dead scroll" at the end
+                    end: () => `+=${Math.abs(scrollAmount)}`,
+                    scrub: 1,
                     pin: true,
                     anticipatePin: 1,
                     invalidateOnRefresh: true,
                 },
             });
 
-            tl.to({}, { duration: 1 });
             tl.to(sectionRef.current, {
                 x: getScrollAmount,
                 ease: "none",
-                duration: 2.5,
+                duration: 1, // Duration is relative to the scrollTrigger scrub
             });
         }, triggerRef);
 

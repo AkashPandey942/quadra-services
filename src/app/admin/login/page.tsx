@@ -1,12 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Box, Container, Card, CardContent, TextField, Button, Typography, Alert } from "@mui/material";
 import { Login as LoginIcon } from "@mui/icons-material";
+import { useAdminAuth } from "@/context/AdminAuthContext";
 
 export default function AdminLoginPage() {
     const router = useRouter();
+    const searchParams = useSearchParams();
+    const returnUrl = searchParams.get("returnUrl") || "/admin/blogs";
+    const { login } = useAdminAuth();
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
@@ -27,7 +32,8 @@ export default function AdminLoginPage() {
             const data = await response.json();
 
             if (data.success) {
-                router.push("/admin/blogs");
+                login(); // Set client-side auth state
+                router.push(returnUrl);
             } else {
                 setError(data.message || "Login failed");
             }

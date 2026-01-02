@@ -1,12 +1,30 @@
 import { NextRequest, NextResponse } from "next/server";
-import { connectDB } from "@/lib/db";
-import Testimonial from "@/models/Testimonial";
+import { promises as fs } from "fs";
+import path from "path";
+
+const filePath = path.join(process.cwd(), "src", "data", "testimonials.json");
+
+// Helper to read testimonials
+async function getTestimonials() {
+  try {
+    const data = await fs.readFile(filePath, "utf-8");
+    return JSON.parse(data);
+  } catch (error) {
+    return [];
+  }
+}
+
+// Helper to write testimonials
+async function saveTestimonials(testimonials: any[]) {
+  await fs.writeFile(filePath, JSON.stringify(testimonials, null, 2), "utf-8");
+}
 
 // GET all testimonials (for admin)
 export async function GET() {
   try {
-    await connectDB();
-    const testimonials = await Testimonial.find({}).sort({ submittedAt: -1 });
+    const testimonials = await getTestimonials();
+    // Sort by submittedAt descending
+    testimonials.sort((a: any, b: any) => new Date(b.submittedAt).getTime() - new Date(a.submittedAt).getTime());
     return NextResponse.json(testimonials);
   } catch (error) {
     console.error("Admin GET Testimonials Error:", error);
@@ -20,18 +38,25 @@ export async function PUT(req: NextRequest) {
     const body = await req.json();
     const { id, ...updateData } = body;
 
-    if (!id) {
+    // Use _id if id is not present (legacy support or frontend specific)
+    const targetId = id || body._id;
+
+    if (!targetId) {
       return NextResponse.json({ error: "Testimonial ID is required" }, { status: 400 });
     }
 
-    await connectDB();
-    const updatedTestimonial = await Testimonial.findByIdAndUpdate(id, updateData, { new: true });
+    const testimonials = await getTestimonials();
+    const index = testimonials.findIndex((t: any) => t._id === targetId);
 
-    if (!updatedTestimonial) {
+    if (index === -1) {
       return NextResponse.json({ error: "Testimonial not found" }, { status: 404 });
     }
 
-    return NextResponse.json({ message: "Testimonial updated successfully", testimonial: updatedTestimonial });
+    // Update fields
+    testimonials[index] = { ...testimonials[index], ...updateData };
+    await saveTestimonials(testimonials);
+
+    return NextResponse.json({ message: "Testimonial updated successfully", testimonial: testimonials[index] });
   } catch (error) {
     console.error("Admin PUT Testimonial Error:", error);
     return NextResponse.json({ error: "Failed to update testimonial" }, { status: 500 });
@@ -48,12 +73,15 @@ export async function DELETE(req: NextRequest) {
       return NextResponse.json({ error: "Testimonial ID is required" }, { status: 400 });
     }
 
-    await connectDB();
-    const deletedTestimonial = await Testimonial.findByIdAndDelete(id);
+    let testimonials = await getTestimonials();
+    const initialLength = testimonials.length;
+    testimonials = testimonials.filter((t: any) => t._id !== id);
 
-    if (!deletedTestimonial) {
+    if (testimonials.length === initialLength) {
       return NextResponse.json({ error: "Testimonial not found" }, { status: 404 });
     }
+
+    await saveTestimonials(testimonials);
 
     return NextResponse.json({ message: "Testimonial deleted successfully" });
   } catch (error) {

@@ -21,6 +21,9 @@ import {
     Tab,
     Avatar,
     IconButton,
+    AppBar,
+    Toolbar,
+    Paper,
 } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
@@ -45,8 +48,6 @@ export default function AdminReviewsPage() {
     const [currentTab, setCurrentTab] = useState(0);
     const [editDialog, setEditDialog] = useState(false);
     const [editingReview, setEditingReview] = useState<Testimonial | null>(null);
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [password, setPassword] = useState("");
 
     // Load all reviews from API
     const loadReviews = async () => {
@@ -65,31 +66,19 @@ export default function AdminReviewsPage() {
         }
     };
 
-    // Check authentication
+    // Load reviews on mount
     useEffect(() => {
-        const auth = sessionStorage.getItem("admin-authenticated");
-        if (auth === "true") {
-            setIsAuthenticated(true);
-            loadReviews();
-        }
+        loadReviews();
     }, []);
 
-    // Handle login
-    const handleLogin = () => {
-        if (password === "admin123") {
-            sessionStorage.setItem("admin-authenticated", "true");
-            setIsAuthenticated(true);
-            loadReviews();
-        } else {
-            alert("Incorrect password!");
+    // Handle logout using API
+    const handleLogout = async () => {
+        try {
+            await fetch("/api/auth/logout", { method: "POST" });
+            window.location.href = "/admin/login";
+        } catch (error) {
+            console.error("Logout failed", error);
         }
-    };
-
-    // Handle logout
-    const handleLogout = () => {
-        sessionStorage.removeItem("admin-authenticated");
-        setIsAuthenticated(false);
-        setPassword("");
     };
 
     // Update review (Approve/Reject/Edit)
@@ -197,162 +186,152 @@ export default function AdminReviewsPage() {
         return name.split(" ").map(n => n[0]).join("").toUpperCase();
     };
 
-    // Login screen
-    if (!isAuthenticated) {
-        return (
-            <Box sx={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", bgcolor: "#f5f5f5" }}>
-                <Card sx={{ maxWidth: 400, width: "100%", p: 4 }}>
-                    <Typography variant="h4" fontWeight="bold" mb={3} textAlign="center">
-                        Admin Login
-                    </Typography>
-                    <TextField
-                        fullWidth
-                        type="password"
-                        label="Password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        onKeyPress={(e) => e.key === 'Enter' && handleLogin()}
-                        sx={{ mb: 3 }}
-                    />
-                    <Button
-                        fullWidth
-                        variant="contained"
-                        size="large"
-                        onClick={handleLogin}
-                    >
-                        Login
-                    </Button>
-                    <Typography variant="caption" color="text.secondary" mt={2} display="block" textAlign="center">
-                        Default password: admin123
-                    </Typography>
-                </Card>
-            </Box>
-        );
-    }
-
     // Admin dashboard
     return (
-        <Box sx={{ minHeight: "100vh", bgcolor: "#f5f5f5", py: 4 }}>
-            <Container maxWidth="lg">
-                {/* Header */}
-                <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 4 }}>
-                    <Typography variant="h3" fontWeight="bold">
-                        Review Management (DB)
+        <Box sx={{ minHeight: "100vh", bgcolor: "#020617" }}>
+            {/* Header */}
+            {/* Header */}
+            <AppBar position="static" sx={{ bgcolor: "rgba(30, 41, 59, 0.8)", backdropFilter: "blur(12px)" }}>
+                <Toolbar>
+                    <Typography variant="h6" sx={{ flexGrow: 1, fontWeight: 700, color: "white" }}>
+                        Review Management
                     </Typography>
                     <Box sx={{ display: 'flex', gap: 2 }}>
-                        <Button variant="outlined" onClick={loadReviews} disabled={loading}>
+                        <Button
+                            color="inherit"
+                            onClick={loadReviews}
+                            disabled={loading}
+                            sx={{ textTransform: "none", color: "white" }}
+                        >
                             {loading ? "Loading..." : "Refresh"}
                         </Button>
-                        <Button variant="outlined" color="error" onClick={handleLogout}>
+                        <Button
+                            color="inherit"
+                            onClick={handleLogout}
+                            sx={{ textTransform: "none", color: "white" }}
+                        >
                             Logout
                         </Button>
                     </Box>
-                </Box>
+                </Toolbar>
+            </AppBar>
 
+            <Container maxWidth="xl" sx={{ py: 4 }}>
                 {/* Stats */}
                 <Box sx={{ display: 'grid', gap: 3, mb: 4, gridTemplateColumns: { xs: '1fr', sm: 'repeat(3, 1fr)' } }}>
-                    <Box>
-                        <Card>
-                            <CardContent>
-                                <Typography variant="h4" fontWeight="bold" color="warning.main">
-                                    {allReviews.filter(r => r.status === 'pending').length}
-                                </Typography>
-                                <Typography variant="body2" color="text.secondary">
-                                    Pending Reviews
-                                </Typography>
-                            </CardContent>
-                        </Card>
-                    </Box>
-                    <Box>
-                        <Card>
-                            <CardContent>
-                                <Typography variant="h4" fontWeight="bold" color="success.main">
-                                    {allReviews.filter(r => r.status === 'approved').length}
-                                </Typography>
-                                <Typography variant="body2" color="text.secondary">
-                                    Approved Reviews
-                                </Typography>
-                            </CardContent>
-                        </Card>
-                    </Box>
-                    <Box>
-                        <Card>
-                            <CardContent>
-                                <Typography variant="h4" fontWeight="bold" color="error.main">
-                                    {allReviews.filter(r => r.status === 'rejected').length}
-                                </Typography>
-                                <Typography variant="body2" color="text.secondary">
-                                    Rejected Reviews
-                                </Typography>
-                            </CardContent>
-                        </Card>
-                    </Box>
+                    <Paper sx={{ p: 3, bgcolor: "rgba(30, 41, 59, 0.4)", backdropFilter: "blur(12px)", border: "1px solid rgba(255, 255, 255, 0.08)", borderRadius: 2 }}>
+                        <Typography variant="h4" fontWeight="bold" sx={{ color: "#F59E0B" }}>
+                            {allReviews.filter(r => r.status === 'pending').length}
+                        </Typography>
+                        <Typography variant="body2" sx={{ color: "rgba(255, 255, 255, 0.8)" }}>
+                            Pending Reviews
+                        </Typography>
+                    </Paper>
+                    <Paper sx={{ p: 3, bgcolor: "rgba(30, 41, 59, 0.4)", backdropFilter: "blur(12px)", border: "1px solid rgba(255, 255, 255, 0.08)", borderRadius: 2 }}>
+                        <Typography variant="h4" fontWeight="bold" sx={{ color: "#22C55E" }}>
+                            {allReviews.filter(r => r.status === 'approved').length}
+                        </Typography>
+                        <Typography variant="body2" sx={{ color: "rgba(255, 255, 255, 0.8)" }}>
+                            Approved Reviews
+                        </Typography>
+                    </Paper>
+                    <Paper sx={{ p: 3, bgcolor: "rgba(30, 41, 59, 0.4)", backdropFilter: "blur(12px)", border: "1px solid rgba(255, 255, 255, 0.08)", borderRadius: 2 }}>
+                        <Typography variant="h4" fontWeight="bold" sx={{ color: "#EF4444" }}>
+                            {allReviews.filter(r => r.status === 'rejected').length}
+                        </Typography>
+                        <Typography variant="body2" sx={{ color: "rgba(255, 255, 255, 0.8)" }}>
+                            Rejected Reviews
+                        </Typography>
+                    </Paper>
                 </Box>
 
                 {/* Tabs */}
-                <Card sx={{ mb: 3 }}>
-                    <Tabs value={currentTab} onChange={(e, v) => setCurrentTab(v)}>
+                <Paper sx={{ mb: 3, bgcolor: "rgba(30, 41, 59, 0.4)", backdropFilter: "blur(12px)", border: "1px solid rgba(255, 255, 255, 0.08)", borderRadius: 2 }}>
+                    <Tabs
+                        value={currentTab}
+                        onChange={(e, v) => setCurrentTab(v)}
+                        sx={{
+                            "& .MuiTab-root": { color: "rgba(255, 255, 255, 0.6)" },
+                            "& .Mui-selected": { color: "white !important" },
+                            "& .MuiTabs-indicator": { bgcolor: "primary.main" }
+                        }}
+                    >
                         <Tab label={`All (${allReviews.length})`} />
                         <Tab label={`Pending (${allReviews.filter(r => r.status === 'pending').length})`} />
                         <Tab label={`Approved (${allReviews.filter(r => r.status === 'approved').length})`} />
                         <Tab label={`Rejected (${allReviews.filter(r => r.status === 'rejected').length})`} />
                     </Tabs>
-                </Card>
+                </Paper>
 
                 {/* Reviews List */}
-                <Box sx={{ display: 'grid', gap: 3 }}>
+                <Box sx={{ display: 'grid', gap: 3, gridTemplateColumns: { xs: '1fr', lg: 'repeat(2, 1fr)' } }}>
                     {loading && allReviews.length === 0 ? (
-                        <Box sx={{ textAlign: "center", py: 8 }}>
-                            <Typography color="text.secondary">Loading reviews...</Typography>
+                        <Box sx={{ gridColumn: "1 / -1", textAlign: "center", py: 8 }}>
+                            <Typography sx={{ color: "rgba(255, 255, 255, 0.5)" }}>Loading reviews...</Typography>
                         </Box>
                     ) : filteredReviews.length === 0 ? (
-                        <Box>
-                            <Card>
-                                <CardContent sx={{ textAlign: "center", py: 8 }}>
-                                    <Typography variant="h6" color="text.secondary">
-                                        No reviews found
-                                    </Typography>
-                                </CardContent>
-                            </Card>
+                        <Box sx={{ gridColumn: "1 / -1" }}>
+                            <Paper sx={{ p: 8, textAlign: "center", bgcolor: "rgba(30, 41, 59, 0.4)", backdropFilter: "blur(12px)", border: "1px solid rgba(255, 255, 255, 0.08)", borderRadius: 2 }}>
+                                <Typography variant="h6" sx={{ color: "rgba(255, 255, 255, 0.5)" }}>
+                                    No reviews found
+                                </Typography>
+                            </Paper>
                         </Box>
                     ) : (
                         filteredReviews.map((review) => (
                             <Box key={review._id}>
-                                <Card>
+                                <Card sx={{
+                                    height: "100%",
+                                    bgcolor: "rgba(30, 41, 59, 0.4)",
+                                    backdropFilter: "blur(12px)",
+                                    border: "1px solid rgba(255, 255, 255, 0.08)",
+                                    borderRadius: 2,
+                                    color: "white"
+                                }}>
                                     <CardContent>
                                         <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", mb: 2 }}>
                                             <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
-                                                <Avatar sx={{ bgcolor: "primary.main", width: 48, height: 48 }}>
+                                                <Avatar sx={{ bgcolor: "primary.main", width: 48, height: 48, border: "2px solid rgba(255,255,255,0.1)" }}>
                                                     {getInitials(review.name)}
                                                 </Avatar>
                                                 <Box>
                                                     <Typography variant="h6" fontWeight="bold">
                                                         {review.name}
                                                     </Typography>
-                                                    <Typography variant="body2" color="text.secondary">
+                                                    <Typography variant="body2" sx={{ color: "rgba(255, 255, 255, 0.6)" }}>
                                                         {review.role}, {review.company}
                                                     </Typography>
                                                 </Box>
                                             </Box>
                                             <Chip
                                                 label={review.status.toUpperCase()}
-                                                color={getStatusColor(review.status)}
                                                 size="small"
+                                                sx={{
+                                                    fontWeight: 600,
+                                                    bgcolor: review.status === 'approved' ? 'rgba(34, 197, 94, 0.2)' : review.status === 'rejected' ? 'rgba(239, 68, 68, 0.2)' : 'rgba(245, 158, 11, 0.2)',
+                                                    color: review.status === 'approved' ? '#4ade80' : review.status === 'rejected' ? '#f87171' : '#fbbf24',
+                                                    border: `1px solid ${review.status === 'approved' ? 'rgba(34, 197, 94, 0.3)' : review.status === 'rejected' ? 'rgba(239, 68, 68, 0.3)' : 'rgba(245, 158, 11, 0.3)'}`
+                                                }}
                                             />
                                         </Box>
 
-                                        <Rating value={review.rating} readOnly size="small" sx={{ mb: 1 }} />
+                                        <Rating
+                                            value={review.rating}
+                                            readOnly
+                                            size="small"
+                                            sx={{ mb: 2, "& .MuiRating-iconEmpty": { color: "rgba(255,255,255,0.3)" } }}
+                                        />
 
-                                        <Typography variant="body1" sx={{ mb: 2, fontStyle: "italic" }}>
+                                        <Typography variant="body1" sx={{ mb: 2, fontStyle: "italic", color: "rgba(255, 255, 255, 0.8)", minHeight: "60px" }}>
                                             &ldquo;{review.testimonial}&rdquo;
                                         </Typography>
 
-                                        <Typography variant="caption" color="text.secondary" display="block" mb={2}>
+                                        <Typography variant="caption" sx={{ display: "block", mb: 3, color: "rgba(255, 255, 255, 0.4)" }}>
                                             Submitted: {new Date(review.submittedAt || review.date).toLocaleString()}
                                         </Typography>
 
                                         {/* Action Buttons */}
-                                        <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap" }}>
+                                        <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap", pt: 2, borderTop: "1px solid rgba(255,255,255,0.1)" }}>
                                             {review.status !== 'approved' && (
                                                 <Button
                                                     variant="contained"
@@ -360,6 +339,7 @@ export default function AdminReviewsPage() {
                                                     size="small"
                                                     startIcon={<CheckCircleIcon />}
                                                     onClick={() => handleApprove(review)}
+                                                    sx={{ textTransform: "none", fontWeight: 600 }}
                                                 >
                                                     Approve
                                                 </Button>
@@ -371,6 +351,7 @@ export default function AdminReviewsPage() {
                                                     size="small"
                                                     startIcon={<CancelIcon />}
                                                     onClick={() => handleReject(review)}
+                                                    sx={{ textTransform: "none", fontWeight: 600 }}
                                                 >
                                                     Reject
                                                 </Button>
@@ -380,6 +361,12 @@ export default function AdminReviewsPage() {
                                                 size="small"
                                                 startIcon={<EditIcon />}
                                                 onClick={() => handleEdit(review)}
+                                                sx={{
+                                                    textTransform: "none",
+                                                    borderColor: "rgba(255,255,255,0.2)",
+                                                    color: "rgba(255,255,255,0.8)",
+                                                    "&:hover": { borderColor: "rgba(255,255,255,0.4)", bgcolor: "rgba(255,255,255,0.05)" }
+                                                }}
                                             >
                                                 Edit
                                             </Button>
@@ -389,6 +376,7 @@ export default function AdminReviewsPage() {
                                                 size="small"
                                                 startIcon={<DeleteIcon />}
                                                 onClick={() => handleDelete(review)}
+                                                sx={{ textTransform: "none" }}
                                             >
                                                 Delete
                                             </Button>
@@ -401,28 +389,55 @@ export default function AdminReviewsPage() {
                 </Box>
 
                 {/* Edit Dialog */}
-                <Dialog open={editDialog} onClose={() => setEditDialog(false)} maxWidth="sm" fullWidth>
-                    <DialogTitle>Edit Review</DialogTitle>
-                    <DialogContent>
+                <Dialog
+                    open={editDialog}
+                    onClose={() => setEditDialog(false)}
+                    maxWidth="sm"
+                    fullWidth
+                    PaperProps={{
+                        sx: {
+                            bgcolor: "#0f172a",
+                            border: "1px solid rgba(255, 255, 255, 0.1)",
+                            color: "white"
+                        }
+                    }}
+                >
+                    <DialogTitle sx={{ borderBottom: "1px solid rgba(255,255,255,0.1)" }}>Edit Review</DialogTitle>
+                    <DialogContent sx={{ mt: 2 }}>
                         {editingReview && (
-                            <Stack spacing={3} sx={{ mt: 2 }}>
+                            <Stack spacing={3} sx={{ mt: 1 }}>
                                 <TextField
                                     label="Name"
                                     fullWidth
                                     value={editingReview.name}
                                     onChange={(e) => setEditingReview({ ...editingReview, name: e.target.value })}
+                                    sx={{
+                                        "& .MuiInputBase-root": { color: "white" },
+                                        "& .MuiInputLabel-root": { color: "rgba(255, 255, 255, 0.6)" },
+                                        "& .MuiOutlinedInput-notchedOutline": { borderColor: "rgba(255, 255, 255, 0.2)" }
+                                    }}
                                 />
                                 <TextField
                                     label="Role"
                                     fullWidth
                                     value={editingReview.role}
                                     onChange={(e) => setEditingReview({ ...editingReview, role: e.target.value })}
+                                    sx={{
+                                        "& .MuiInputBase-root": { color: "white" },
+                                        "& .MuiInputLabel-root": { color: "rgba(255, 255, 255, 0.6)" },
+                                        "& .MuiOutlinedInput-notchedOutline": { borderColor: "rgba(255, 255, 255, 0.2)" }
+                                    }}
                                 />
                                 <TextField
                                     label="Company"
                                     fullWidth
                                     value={editingReview.company}
                                     onChange={(e) => setEditingReview({ ...editingReview, company: e.target.value })}
+                                    sx={{
+                                        "& .MuiInputBase-root": { color: "white" },
+                                        "& .MuiInputLabel-root": { color: "rgba(255, 255, 255, 0.6)" },
+                                        "& .MuiOutlinedInput-notchedOutline": { borderColor: "rgba(255, 255, 255, 0.2)" }
+                                    }}
                                 />
                                 <TextField
                                     label="Review"
@@ -431,19 +446,25 @@ export default function AdminReviewsPage() {
                                     rows={4}
                                     value={editingReview.testimonial}
                                     onChange={(e) => setEditingReview({ ...editingReview, testimonial: e.target.value })}
+                                    sx={{
+                                        "& .MuiInputBase-root": { color: "white" },
+                                        "& .MuiInputLabel-root": { color: "rgba(255, 255, 255, 0.6)" },
+                                        "& .MuiOutlinedInput-notchedOutline": { borderColor: "rgba(255, 255, 255, 0.2)" }
+                                    }}
                                 />
                                 <Box>
-                                    <Typography variant="body2" gutterBottom>Rating</Typography>
+                                    <Typography variant="body2" gutterBottom sx={{ color: "rgba(255,255,255,0.7)" }}>Rating</Typography>
                                     <Rating
                                         value={editingReview.rating}
                                         onChange={(e, value) => setEditingReview({ ...editingReview, rating: value || 5 })}
+                                        sx={{ "& .MuiRating-iconEmpty": { color: "rgba(255,255,255,0.3)" } }}
                                     />
                                 </Box>
                             </Stack>
                         )}
                     </DialogContent>
-                    <DialogActions>
-                        <Button onClick={() => setEditDialog(false)}>Cancel</Button>
+                    <DialogActions sx={{ borderTop: "1px solid rgba(255,255,255,0.1)", p: 2 }}>
+                        <Button onClick={() => setEditDialog(false)} sx={{ color: "rgba(255,255,255,0.6)" }}>Cancel</Button>
                         <Button onClick={handleSaveEdit} variant="contained">Save</Button>
                     </DialogActions>
                 </Dialog>

@@ -218,7 +218,7 @@ export default function Industries() {
                             sm: "repeat(2, 1fr)",
                             md: "repeat(4, 1fr)"
                         },
-                        gap: { xs: 2.5, sm: 3, md: 3.5 },
+                        gap: { xs: 2, sm: 3, md: 3.5 },
                         px: { xs: 2, sm: 2, md: 4 },
                     }}
                 >
