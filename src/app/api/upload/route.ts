@@ -3,7 +3,12 @@ import { writeFile, mkdir } from "fs/promises";
 import path from "path";
 import { existsSync } from "fs";
 import { requireAuth } from "@/lib/auth";
+import { connectDB } from "@/lib/db";
+
 export async function POST(request: NextRequest) {
+  // Ensure DB is connected (lazy connection)
+  await connectDB();
+
   // ---- AUTH CHECK ----
   const { authorized, message } = await requireAuth();
   if (!authorized) {
