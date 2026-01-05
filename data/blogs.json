@@ -13,5 +13,20 @@
     "createdAt": "2026-01-01T19:51:22.845Z",
     "updatedAt": "2026-01-01T19:51:22.845Z",
     "views": 0
+  },
+  {
+    "id": "akash",
+    "slug": "akash",
+    "title": "Akash",
+    "excerpt": "csghdvhdsvdhsdjsgkdgwkdgeygs",
+    "content": "hgdahsgdgasjgdajs",
+    "author": "Admin",
+    "category": "Technology",
+    "tags": [],
+    "featuredImage": "/uploads/blog/1767633795710-akash.jpg",
+    "status": "published",
+    "createdAt": "2026-01-05T17:24:16.701Z",
+    "updatedAt": "2026-01-05T17:24:16.704Z",
+    "views": 0
   }
 ]
