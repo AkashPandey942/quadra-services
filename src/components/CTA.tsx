@@ -184,7 +184,7 @@ export default function CTA() {
                                 sx={{
                                     fontWeight: 900,
                                     color: "white",
-                                    fontSize: { xs: "clamp(1.8rem, 6vw, 4.5rem)", md: "4.5rem" },
+                                    fontSize: { xs: "var(--font-size-2xl)", sm: "var(--font-size-3xl)", md: "4.5rem" },
                                     lineHeight: 1.1,
                                     mb: 2,
                                     letterSpacing: "-0.02em",
@@ -200,10 +200,10 @@ export default function CTA() {
                                         "&::after": {
                                             content: '""',
                                             position: "absolute",
-                                            bottom: 10,
+                                            bottom: { xs: 4, sm: 8, md: 10 },
                                             left: 0,
                                             width: "100%",
-                                            height: "8px",
+                                            height: { xs: "4px", md: "8px" },
                                             bgcolor: currentTheme.primary + "33",
                                             zIndex: -1,
                                             borderRadius: 2
@@ -221,11 +221,11 @@ export default function CTA() {
                             transition={{ duration: 0.6, delay: 0.4 }}
                             variant="h6"
                             sx={{
-                                color: "rgba(255, 255, 255, 0.5)",
+                                color: "rgba(255, 255, 255, 0.55)",
                                 maxWidth: "750px",
                                 mx: "auto",
-                                mb: 6,
-                                fontSize: { xs: "1rem", md: "1.25rem" },
+                                mb: { xs: 4, md: 6 },
+                                fontSize: { xs: "var(--font-size-base)", md: "1.25rem" },
                                 fontWeight: 400,
                                 lineHeight: 1.6,
                             }}
@@ -235,33 +235,33 @@ export default function CTA() {
 
                         <Stack
                             direction={{ xs: "column", sm: "row" }}
-                            spacing={{ xs: 2, sm: 3 }}
+                            spacing={{ xs: 2.5, sm: 3 }}
                             justifyContent="center"
                             alignItems={{ xs: "stretch", sm: "center" }}
                         >
                             <MotionButton
                                 whileHover={{ scale: 1.05, y: -5 }}
-                                whileTap={{ scale: 0.98 }}
+                                whileTap={{ scale: 0.97 }}
                                 variant="contained"
                                 size="large"
                                 endIcon={<ArrowForwardIcon />}
                                 sx={{
-                                    px: { xs: 4, sm: 6 },
-                                    py: { xs: 1.75, sm: 2.2 },
-                                    minHeight: { xs: 48, sm: "auto" },
+                                    px: { xs: 5, sm: 6 },
+                                    py: { xs: 2, sm: 2.2 },
+                                    minHeight: { xs: 52, sm: 56 },
                                     borderRadius: 3,
                                     bgcolor: currentTheme.primary,
                                     fontWeight: 800,
                                     fontSize: { xs: "1rem", sm: "1.1rem" },
                                     textTransform: "none",
-                                    boxShadow: `0 20px 40px -10px ${currentTheme.primary}66`,
+                                    boxShadow: `0 20px 40px -10px ${currentTheme.primary}55`,
                                     "&:hover": {
                                         bgcolor: currentTheme.primary,
                                         filter: "brightness(1.1)",
-                                        boxShadow: `0 25px 50px -12px ${currentTheme.primary}88`,
+                                        boxShadow: `0 25px 50px -12px ${currentTheme.primary}77`,
                                     },
                                     "&:active": {
-                                        transform: "scale(0.98)"
+                                        transform: "scale(0.97)"
                                     },
                                     transition: "all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
                                 }}
@@ -271,7 +271,7 @@ export default function CTA() {
 
                             <MotionButton
                                 whileHover={{ scale: 1.05, y: -5, backgroundColor: "rgba(255,255,255,0.08)" }}
-                                whileTap={{ scale: 0.98 }}
+                                whileTap={{ scale: 0.97 }}
                                 variant="outlined"
                                 size="large"
                                 startIcon={<PhoneIcon />}
@@ -285,11 +285,11 @@ export default function CTA() {
                                     }
                                 }}
                                 sx={{
-                                    px: { xs: 4, sm: 6 },
-                                    py: { xs: 1.75, sm: 2.2 },
-                                    minHeight: { xs: 48, sm: "auto" },
+                                    px: { xs: 5, sm: 6 },
+                                    py: { xs: 2, sm: 2.2 },
+                                    minHeight: { xs: 52, sm: 56 },
                                     borderRadius: 3,
-                                    borderColor: "rgba(255, 255, 255, 0.15)",
+                                    borderColor: "rgba(255, 255, 255, 0.2)",
                                     color: "white",
                                     fontWeight: 700,
                                     fontSize: { xs: "1rem", sm: "1.1rem" },
@@ -297,10 +297,10 @@ export default function CTA() {
                                     backdropFilter: "blur(10px)",
                                     "&:hover": {
                                         borderColor: "white",
-                                        borderWidth: 1,
+                                        bgcolor: "rgba(255,255,255,0.05)",
                                     },
                                     "&:active": {
-                                        transform: "scale(0.98)"
+                                        transform: "scale(0.97)"
                                     },
                                     transition: "all 0.3s ease",
                                 }}

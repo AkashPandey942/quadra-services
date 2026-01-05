@@ -47,7 +47,7 @@ export async function POST(request: NextRequest) {
        ADMIN EMAIL
     ================================ */
     await transporter.sendMail({
-      from: `"Quadra Services" <${process.env.EMAIL_USER}>`,
+      from: `"Apex Nexon" <${process.env.EMAIL_USER}>`,
       to: "ipandeyakash@gmail.com",
       subject: `New Contact Form Submission from ${name}`,
       html: `
@@ -63,7 +63,7 @@ export async function POST(request: NextRequest) {
             </p>
           </div>
           <p style="color: #666; font-size: 12px; margin-top: 20px;">
-            Sent from Quadra Services contact form
+            Sent from Apex Nexon contact form
           </p>
         </div>
       `,
@@ -73,9 +73,9 @@ export async function POST(request: NextRequest) {
        USER CONFIRMATION EMAIL
     ================================ */
     await transporter.sendMail({
-      from: `"Quadra Services" <${process.env.EMAIL_USER}>`,
+      from: `"Apex Nexon" <${process.env.EMAIL_USER}>`,
       to: email,
-      subject: "Thank you for contacting Quadra Services",
+      subject: "Thank you for contacting Apex Nexon",
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #E91E63;">Thank You for Reaching Out!</h2>
@@ -93,7 +93,7 @@ export async function POST(request: NextRequest) {
 
           <p>
             Best regards,<br />
-            <strong>Quadra Services Team</strong>
+            <strong>Apex Nexon Team</strong>
           </p>
 
           <hr style="border: none; border-top: 1px solid #ddd; margin: 30px 0;" />

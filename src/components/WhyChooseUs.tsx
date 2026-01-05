@@ -161,7 +161,7 @@ export default function WhyChooseUs() {
                             lineHeight: 1.1,
                         }}
                     >
-                        Why Businesses Trust <span style={{ color: currentTheme.primary }}>Quadra Services</span>
+                        Why Businesses Trust <span style={{ color: currentTheme.primary }}>Apex Nexon</span>
                     </Typography>
                     <Typography
                         variant="h6"

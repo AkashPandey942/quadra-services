@@ -58,61 +58,9 @@ export default function Header() {
             />
           </Link>
 
-          {/* CENTER BREADCRUMB - DESKTOP ONLY */}
-          <Box
-            sx={{
-              flexGrow: 1,
-              display: { xs: "none", md: "flex" },
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                background: "rgba(255, 255, 255, 0.03)",
-                px: 2,
-                py: 0.5,
-                borderRadius: "20px",
-                border: "1px solid rgba(255, 255, 255, 0.05)",
-              }}
-            >
-              <Typography
-                variant="caption"
-                sx={{
-                  color: "rgba(255, 255, 255, 0.5)",
-                  fontWeight: 500,
-                  fontSize: "0.75rem",
-                }}
-              >
-                Home
-              </Typography>
-              <Typography
-                variant="caption"
-                sx={{
-                  mx: 1,
-                  color: "divider",
-                }}
-              >
-                /
-              </Typography>
-              <Typography
-                variant="subtitle2"
-                sx={{
-                  fontWeight: 700,
-                  color: "primary.main",
-                  fontSize: "0.85rem",
-                  letterSpacing: "0.5px",
-                }}
-              >
-                Comprehensive Technology Services
-              </Typography>
-            </Box>
-          </Box>
 
-          {/* MOBILE SPACER - Push hamburger to right */}
-          <Box sx={{ flexGrow: 1, display: { xs: "block", md: "none" } }} />
+          {/* SPACER - Push navigation to right */}
+          <Box sx={{ flexGrow: 1 }} />
 
           {/* DESKTOP NAV */}
           <Box

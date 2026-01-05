@@ -221,13 +221,13 @@ export default function SolutionsPage() {
                                     transition: "all 0.3s ease",
                                     cursor: "pointer",
                                     "&:hover": {
-                                        transform: "translateY(-10px)",
+                                        transform: "translateY(-10px) scale(1.02)",
                                         borderColor: solution.color,
                                         boxShadow: `0 20px 40px -10px ${solution.color}44`,
                                         "& .solution-icon": {
                                             bgcolor: solution.color,
                                             color: "white",
-                                            transform: "scale(1.1) rotate(5deg)"
+                                            transform: "rotate(360deg) scale(1.1)"
                                         }
                                     }
                                 }}
@@ -244,11 +244,12 @@ export default function SolutionsPage() {
                                             alignItems: "center",
                                             justifyContent: "center",
                                             mb: 2,
-                                            transition: "all 0.3s ease",
+                                            color: solution.color,
+                                            transition: "all 0.6s ease",
                                             border: `2px solid ${solution.color}44`
                                         }}
                                     >
-                                        <solution.icon sx={{ fontSize: 30, color: solution.color }} />
+                                        <solution.icon sx={{ fontSize: 30 }} />
                                     </Box>
 
                                     <Typography variant="h6" sx={{ fontWeight: 700, color: "white", mb: 1.5 }}>

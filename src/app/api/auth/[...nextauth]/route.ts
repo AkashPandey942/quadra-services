@@ -15,9 +15,11 @@ export const authOptions = {
   adapter: MongoDBAdapter(clientPromise),
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
-    async session({ session, user }) {
+    async session({ session, user }: any) {
       // expose a role if you store it, otherwise default to "user"
-      (session.user as any).role = (user as any).role ?? "user";
+      if (session?.user) {
+        (session.user as any).role = (user as any).role ?? "user";
+      }
       return session;
     },
   },

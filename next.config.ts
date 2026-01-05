@@ -1,11 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  api: {
-    bodyParser: {
-      sizeLimit: "10mb", // Increase body size limit for file uploads
-    },
-  },
+  /* config options here */
 };
 
 export default nextConfig;

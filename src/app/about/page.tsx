@@ -74,7 +74,7 @@ export default function AboutPage() {
               zIndex: 1
             }}
           >
-            About Quadra Services
+            About Apex Nexon
           </Typography>
           <Typography
             variant="h5"
@@ -113,8 +113,14 @@ export default function AboutPage() {
                 transition: "all 0.4s ease",
                 "&:hover": {
                   borderColor: currentTheme.primary,
-                  transform: "translateY(-10px)",
+                  transform: "translateY(-10px) scale(1.02)",
                   boxShadow: `0 20px 40px -10px ${currentTheme.primary}33`,
+                  bgcolor: "rgba(30, 41, 59, 0.6)",
+                  "& .mission-icon": {
+                    bgcolor: currentTheme.primary,
+                    color: "white",
+                    transform: "rotate(360deg) scale(1.1)"
+                  }
                 }
               }}
             >
@@ -143,10 +149,13 @@ export default function AboutPage() {
                     alignItems: "center",
                     justifyContent: "center",
                     mr: 2,
-                    border: `2px solid ${currentTheme.primary}44`
+                    border: `2px solid ${currentTheme.primary}44`,
+                    color: currentTheme.primary,
+                    transition: "all 0.6s ease"
                   }}
+                  className="mission-icon"
                 >
-                  <Rocket sx={{ fontSize: 35, color: currentTheme.primary }} />
+                  <Rocket sx={{ fontSize: 35 }} />
                 </Box>
                 <Typography variant="h3" sx={{ fontWeight: 800, color: "white", fontSize: { xs: "1.8rem", md: "2.2rem" } }}>
                   Our Mission
@@ -164,7 +173,7 @@ export default function AboutPage() {
                   zIndex: 1
                 }}
               >
-                At Quadra Services, our mission is to harness the power of cutting-edge technology to drive operational efficiency across industries. We believe that by integrating intelligent systems into everyday business processes, we can help companies reduce costs, optimize workflows, and unlock new opportunities for innovation and growth.
+                At Apex Nexon, our mission is to harness the power of cutting-edge technology to drive operational efficiency across industries. We believe that by integrating intelligent systems into everyday business processes, we can help companies reduce costs, optimize workflows, and unlock new opportunities for innovation and growth.
               </Typography>
               <Typography
                 variant="body1"
@@ -200,8 +209,14 @@ export default function AboutPage() {
                 transition: "all 0.4s ease",
                 "&:hover": {
                   borderColor: currentTheme.secondary,
-                  transform: "translateY(-10px)",
+                  transform: "translateY(-10px) scale(1.02)",
                   boxShadow: `0 20px 40px -10px ${currentTheme.secondary}33`,
+                  bgcolor: "rgba(30, 41, 59, 0.6)",
+                  "& .vision-icon": {
+                    bgcolor: currentTheme.secondary,
+                    color: "white",
+                    transform: "rotate(360deg) scale(1.1)"
+                  }
                 }
               }}
             >
@@ -230,10 +245,13 @@ export default function AboutPage() {
                     alignItems: "center",
                     justifyContent: "center",
                     mr: 2,
-                    border: `2px solid ${currentTheme.secondary}44`
+                    border: `2px solid ${currentTheme.secondary}44`,
+                    color: currentTheme.secondary,
+                    transition: "all 0.6s ease"
                   }}
+                  className="vision-icon"
                 >
-                  <EmojiObjects sx={{ fontSize: 35, color: currentTheme.secondary }} />
+                  <EmojiObjects sx={{ fontSize: 35 }} />
                 </Box>
                 <Typography variant="h3" sx={{ fontWeight: 800, color: "white", fontSize: { xs: "1.8rem", md: "2.2rem" } }}>
                   Our Vision
@@ -306,8 +324,9 @@ export default function AboutPage() {
                     borderRadius: 4,
                     transition: "all 0.3s ease",
                     "&:hover": {
-                      transform: "translateY(-8px)",
+                      transform: "translateY(-10px) scale(1.02)",
                       borderColor: currentTheme.primary,
+                      bgcolor: "rgba(30, 41, 59, 0.6)",
                       boxShadow: `0 15px 30px -10px ${currentTheme.primary}33`,
                       "& .value-icon": {
                         bgcolor: currentTheme.primary,
@@ -329,11 +348,12 @@ export default function AboutPage() {
                         alignItems: "center",
                         justifyContent: "center",
                         mb: 2,
+                        color: currentTheme.primary,
                         transition: "all 0.5s ease",
                         border: "1px solid rgba(255, 255, 255, 0.1)"
                       }}
                     >
-                      <value.icon sx={{ fontSize: 30, color: currentTheme.primary }} />
+                      <value.icon sx={{ fontSize: 30 }} />
                     </Box>
                     <Typography variant="h6" sx={{ fontWeight: 700, color: "white", mb: 1.5 }}>
                       {value.title}
@@ -378,7 +398,7 @@ export default function AboutPage() {
                 </Typography>
               </Box>
               <Typography variant="body1" sx={{ color: "rgba(255, 255, 255, 0.7)", lineHeight: 1.8, mb: 2 }}>
-                Quadra Services operates as a fully remote-first organization, embracing the flexibility and diversity that remote work brings. This approach allows us to attract top talent from around the world and maintain a healthy work-life balance for our team.
+                Apex Nexon operates as a fully remote-first organization, embracing the flexibility and diversity that remote work brings. This approach allows us to attract top talent from around the world and maintain a healthy work-life balance for our team.
               </Typography>
               <Typography variant="body1" sx={{ color: "rgba(255, 255, 255, 0.6)", lineHeight: 1.8 }}>
                 Our remote-first model enables us to deliver consistent, high-quality solutions while fostering an inclusive and collaborative environment that values individual contributions and collective success.
@@ -414,7 +434,7 @@ export default function AboutPage() {
                 </Typography>
               </Box>
               <Typography variant="body1" sx={{ color: "rgba(255, 255, 255, 0.7)", lineHeight: 1.8, mb: 2 }}>
-                Founded and led by industry experts with deep experience in technology, software development, and business operations, Quadra Services combines visionary leadership with hands-on expertise.
+                Founded and led by industry experts with deep experience in technology, software development, and business operations, Apex Nexon combines visionary leadership with hands-on expertise.
               </Typography>
               <Typography variant="body1" sx={{ color: "rgba(255, 255, 255, 0.6)", lineHeight: 1.8 }}>
                 Our team consists of seasoned professionals who bring diverse backgrounds in software engineering, data science, and business strategy, ensuring that every solution we deliver is both innovative and practical.
@@ -477,7 +497,7 @@ export default function AboutPage() {
               zIndex: 1
             }}
           >
-            Quadra Services was born from the recognition that many businesses struggle to harness the full potential of modern technology due to complex implementations and lack of expertise. Our founders, drawing from years of experience in software development and business operations, set out to bridge this gap.
+            Apex Nexon was born from the recognition that many businesses struggle to harness the full potential of modern technology due to complex implementations and lack of expertise. Our founders, drawing from years of experience in software development and business operations, set out to bridge this gap.
           </Typography>
           <Typography
             variant="body1"

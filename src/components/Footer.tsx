@@ -7,7 +7,7 @@ import { useBackground } from "@/context/BackgroundContext";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import InstagramIcon from "@mui/icons-material/Instagram";
-import TwitterIcon from "@mui/icons-material/Twitter";
+import XIcon from "@mui/icons-material/X";
 import EmailIcon from "@mui/icons-material/Email";
 import PhoneIcon from "@mui/icons-material/Phone";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
@@ -81,7 +81,7 @@ export default function Footer() {
             <Stack direction="row" spacing={1} role="list" aria-label="Social media links">
               {[
                 { icon: LinkedInIcon, link: "#", label: "Follow us on LinkedIn" },
-                { icon: TwitterIcon, link: "#", label: "Follow us on Twitter" },
+                { icon: XIcon, link: "#", label: "Follow us on X" },
                 { icon: InstagramIcon, link: "#", label: "Follow us on Instagram" },
                 { icon: FacebookIcon, link: "#", label: "Follow us on Facebook" },
               ].map((social, idx) => (

@@ -101,7 +101,7 @@ export default function FAQ() {
                             lineHeight: 1.6,
                         }}
                     >
-                        Find clear, concise answers to help you understand our process and what to expect when partnering with Quadra Services.
+                        Find clear, concise answers to help you understand our process and what to expect when partnering with Apex Nexon.
                     </Typography>
                 </Box>
 

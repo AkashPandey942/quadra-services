@@ -1,4 +1,4 @@
-# 🎯 Quadra Services - Responsive UX Improvements & Analysis
+# 🎯 Apex Nexon - Responsive UX Improvements & Analysis
 
 ## Executive Summary
 **Website:** https://quadra-services-aa.vercel.app/  

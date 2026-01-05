@@ -133,7 +133,7 @@ export default function AdminLoginPage() {
                                 Default Credentials:
                             </Typography>
                             <Typography variant="body2" sx={{ color: "rgba(255, 255, 255, 0.7)", mt: 0.5 }}>
-                                Email: admin@quadraservices.com
+                                Email: admin@apexnexon.com
                             </Typography>
                             <Typography variant="body2" sx={{ color: "rgba(255, 255, 255, 0.7)" }}>
                                 Password: admin123

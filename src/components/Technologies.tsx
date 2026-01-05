@@ -128,8 +128,8 @@ function SkillCard({ skill, index, isMobile }: SkillCardProps) {
             : isMobile
                 ? rangeStart + 0.03
                 : rangeStart + 0.05;
-    const exitStart = isMobile ? rangeEnd - 0.03 : rangeEnd - 0.05;
-    const exitEnd = isMobile ? rangeEnd + 0.05 : rangeEnd + 0.05;
+    const exitStart = isMobile ? rangeEnd - 0.05 : rangeEnd - 0.05;
+    const exitEnd = isMobile ? rangeEnd + 0.02 : rangeEnd + 0.05;
 
     const cardRef = useRef<HTMLDivElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
@@ -493,7 +493,7 @@ function SkillCard({ skill, index, isMobile }: SkillCardProps) {
                     ref={titleRef}
                     variant="h2"
                     sx={{
-                        fontSize: { xs: "2.5rem", sm: "3.5rem", md: "4.5rem", lg: "5.5rem", xl: "7rem" },
+                        fontSize: { xs: "2.2rem", sm: "3.2rem", md: "4.5rem", lg: "5.5rem", xl: "7rem" },
                         fontWeight: 900,
                         mb: { xs: 2, sm: 3, md: 4 },
                         letterSpacing: "-0.05em",
@@ -807,7 +807,7 @@ export default function Technologies() {
             component="section"
             id="technologies"
             ref={containerRef}
-            sx={{ position: "relative", height: "800vh", width: "100%" }}
+            sx={{ position: "relative", height: { xs: "500vh", md: "800vh" }, width: "100%" }}
         >
             <Box
                 sx={{
@@ -863,7 +863,7 @@ export default function Technologies() {
                         display: "flex",
                         justifyContent: "center",
                         whiteSpace: "nowrap",
-                        fontSize: isMobile ? "15vh" : "30vw",
+                        fontSize: isMobile ? "12vh" : "30vw",
                         fontWeight: 900,
                         color: "transparent",
                         WebkitTextStroke: "2px rgba(255,255,255,0.08)",

@@ -69,16 +69,15 @@ export default function Hero() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
                 sx={{
-                  lineHeight: 1.2,
-                  fontSize: { xs: "clamp(1.8rem, 6vw, 3.5rem)", md: "3.5rem" },
+                  lineHeight: 1.1,
+                  fontSize: { xs: "var(--font-size-2xl)", sm: "var(--font-size-3xl)", md: "3.5rem" },
+                  mb: { xs: 1, md: 2 }
                 }}
               >
-                We Build{" "}
+                Where Intelligence <br />
                 <Box component="span" sx={{ color: "#E91E63" }}>
-                  Intelligent
+                  Meets Automation
                 </Box>
-                <br />
-                Digital Universes
               </MotionTypography>
 
               <MotionTypography
@@ -88,16 +87,15 @@ export default function Hero() {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 sx={{
                   color: "rgba(255,255,255,0.7)",
-                  fontSize: { xs: "1rem", md: "1.1rem" },
+                  fontSize: { xs: "var(--font-size-base)", md: "1.1rem" },
                   maxWidth: "90%",
+                  lineHeight: 1.6,
                 }}
               >
-                Full-Stack Development • AI Engineering • UI/UX Design.
-                <br />
-                Your 24×7 digital partner — from idea to execution.
+                We build AI-driven software solutions that automate operations, scale businesses, and unlock digital growth.
               </MotionTypography>
 
-              <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap sx={{ mt: 1 }}>
+              <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap sx={{ mt: 1, mb: { xs: 2, md: 1 } }}>
                 {[
                   { icon: <CodeIcon fontSize="small" />, label: "Dev" },
                   { icon: <SmartToyIcon fontSize="small" />, label: "AI" },
@@ -112,12 +110,13 @@ export default function Hero() {
                       display: "flex",
                       alignItems: "center",
                       gap: 0.5,
-                      px: 1.5,
-                      py: 0.5,
+                      px: 2,
+                      py: 0.75,
                       borderRadius: 10,
-                      bgcolor: "rgba(255,255,255,0.1)",
+                      bgcolor: "rgba(255,255,255,0.08)",
                       fontSize: "0.85rem",
                       border: "1px solid rgba(255,255,255,0.1)",
+                      fontWeight: 500,
                     }}
                   >
                     {item.icon} {item.label}
@@ -131,44 +130,45 @@ export default function Hero() {
                 transition={{ delay: 0.6 }}
                 sx={{ pt: 2 }}
               >
-                <Stack direction={{ xs: "column", sm: "row" }} spacing={{ xs: 2, sm: 2 }}>
+                <Stack direction={{ xs: "column", sm: "row" }} spacing={{ xs: 2.5, sm: 2 }}>
                   <Button
                     variant="contained"
                     size="large"
                     sx={{
-                      px: { xs: 3, sm: 4 },
+                      px: { xs: 3, sm: 3 },
                       py: { xs: 1.5, sm: "auto" },
-                      minHeight: { xs: 48, sm: "auto" },
+                      minHeight: { xs: 48, sm: 52 },
                       background: "linear-gradient(90deg, #E91E63, #6A1B9A)",
-                      borderRadius: 2,
+                      borderRadius: 3,
                       textTransform: "none",
-                      fontSize: { xs: "0.95rem", sm: "1rem" },
-                      fontWeight: 600,
+                      fontSize: { xs: "1rem", sm: "1.05rem" },
+                      fontWeight: 700,
                       transition: "all 0.3s ease",
+                      boxShadow: "0 10px 20px -5px rgba(233, 30, 99, 0.4)",
                       "&:hover": {
                         transform: "translateY(-3px)",
-                        boxShadow: "0 10px 25px rgba(233, 30, 99, 0.4)",
+                        boxShadow: "0 15px 30px rgba(233, 30, 99, 0.5)",
                       },
                       "&:active": {
-                        transform: "scale(0.98)",
+                        transform: "scale(0.97)",
                       },
                     }}
                   >
-                    Get Free Consultation
+                    Get a Free Consultation
                   </Button>
                   <Button
                     variant="outlined"
                     size="large"
                     sx={{
-                      px: { xs: 3, sm: 4 },
+                      px: { xs: 3, sm: 3 },
                       py: { xs: 1.5, sm: "auto" },
-                      minHeight: { xs: 48, sm: "auto" },
+                      minHeight: { xs: 48, sm: 52 },
                       color: "#fff",
-                      borderColor: "rgba(255,255,255,0.3)",
-                      borderRadius: 2,
+                      borderColor: "rgba(255,255,255,0.25)",
+                      borderRadius: 3,
                       textTransform: "none",
-                      fontSize: { xs: "0.95rem", sm: "1rem" },
-                      fontWeight: 600,
+                      fontSize: { xs: "1rem", sm: "1.05rem" },
+                      fontWeight: 700,
                       transition: "all 0.3s ease",
                       "&:hover": {
                         borderColor: "#fff",
@@ -176,11 +176,11 @@ export default function Hero() {
                         transform: "translateY(-3px)",
                       },
                       "&:active": {
-                        transform: "scale(0.98)",
+                        transform: "scale(0.97)",
                       },
                     }}
                   >
-                    View Work
+                    Talk to an Expert
                   </Button>
                 </Stack>
               </MotionBox>
@@ -201,8 +201,8 @@ export default function Hero() {
             <Box
               sx={{
                 position: "relative",
-                width: { xs: "min(350px, 90vw)", md: 400 }, // Responsive size
-                height: { xs: "min(350px, 90vw)", md: 400 },
+                width: { xs: "min(280px, 85vw)", md: 400 }, // Scaled down for mobile
+                height: { xs: "min(280px, 85vw)", md: 400 },
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",

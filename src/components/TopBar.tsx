@@ -3,7 +3,7 @@ import { Box, Typography } from "@mui/material";
 import Facebook from "@mui/icons-material/Facebook";
 import LinkedIn from "@mui/icons-material/LinkedIn";
 import Instagram from "@mui/icons-material/Instagram";
-import Twitter from "@mui/icons-material/Twitter";
+import X from "@mui/icons-material/X";
 import { useBackground } from "@/context/BackgroundContext";
 
 export default function TopBar() {
@@ -24,7 +24,7 @@ export default function TopBar() {
           <Facebook fontSize="small" sx={{ cursor: "pointer", "&:hover": { color: "primary.main" } }} />
           <LinkedIn fontSize="small" sx={{ cursor: "pointer", "&:hover": { color: "primary.main" } }} />
           <Instagram fontSize="small" sx={{ cursor: "pointer", "&:hover": { color: "primary.main" } }} />
-          <Twitter fontSize="small" sx={{ cursor: "pointer", "&:hover": { color: "primary.main" } }} />
+          <X fontSize="small" sx={{ cursor: "pointer", "&:hover": { color: "primary.main" } }} />
         </Box>
         <Box
           onClick={cycleTheme}
@@ -46,7 +46,7 @@ export default function TopBar() {
       </Box>
 
       <Typography fontSize={14}>
-        info@quadratech.com | +91 99999 99999
+        hello@apexnexon.com | +91 99999 99999
       </Typography>
     </Box>
   );

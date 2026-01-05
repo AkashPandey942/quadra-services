@@ -1,0 +1,71 @@
+﻿
+> quadra-services@0.1.0 build
+> next build
+
+   Γû▓ Next.js 16.0.10 (Turbopack)
+   - Environments: .env
+
+   Creating an optimized production build ...
+npm : 
+At line:1 char:1
++ npm run build > 
+final_build_log.txt 
+2>&1
++ ~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo   
+           : NotSpe  
+  cified: (:String   
+ ) [], RemoteExce    
+ption
+    + FullyQualified 
+   ErrorId : Native  
+  CommandError
+ 
+> Build error 
+occurred
+Error: Turbopack 
+build failed with 1 
+errors:
+./src/proxy.ts
+Proxy is missing 
+expected function 
+export name
+This function is 
+what Next.js runs 
+for every request 
+handled by this 
+proxy (previously 
+called middleware).
+
+Why this happens:
+- You are migrating 
+from `middleware` to 
+`proxy`, but haven't 
+updated the exported 
+function.
+- The file exists 
+but doesn't export a 
+function.
+- The export is not 
+a function (e.g., an 
+object or constant).
+- There's a syntax 
+error preventing the 
+export from being 
+recognized.
+
+To fix it:
+- Ensure this file 
+has either a default 
+or "proxy" function 
+export.
+
+Learn more: https://n
+extjs.org/docs/messag
+es/middleware-to-prox
+y
+
+
+    at ignore-listed 
+frames

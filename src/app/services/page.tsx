@@ -263,8 +263,14 @@ export default function ServicesPage() {
                 transition: "all 0.3s ease",
                 "&:hover": {
                   borderColor: currentTheme.primary,
-                  transform: "translateY(-5px)",
-                  boxShadow: `0 20px 40px -10px ${currentTheme.primary}33`
+                  transform: "translateY(-10px) scale(1.02)",
+                  boxShadow: `0 20px 40px -10px ${currentTheme.primary}33`,
+                  bgcolor: "rgba(30, 41, 59, 0.6)",
+                  "& .service-icon": {
+                    bgcolor: currentTheme.primary,
+                    color: "white",
+                    transform: "rotate(360deg) scale(1.1)"
+                  }
                 }
               }}
             >
@@ -295,10 +301,13 @@ export default function ServicesPage() {
                     alignItems: "center",
                     justifyContent: "center",
                     border: `2px solid ${currentTheme.primary}44`,
-                    flexShrink: 0
+                    color: currentTheme.primary,
+                    flexShrink: 0,
+                    transition: "all 0.6s ease"
                   }}
+                  className="service-icon"
                 >
-                  <service.icon sx={{ fontSize: { xs: 35, md: 45 }, color: currentTheme.primary }} />
+                  <service.icon sx={{ fontSize: { xs: 35, md: 45 } }} />
                 </Box>
                 <Typography
                   variant="h3"

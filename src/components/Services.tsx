@@ -112,14 +112,15 @@ export default function Services() {
             // If content fits (scrollAmount is visible or positive), no need to scroll
             if (scrollAmount >= 0) return;
 
+            const scrollDist = Math.abs(scrollAmount);
+            const buffer = 1000;
+
             const tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: triggerRef.current,
                     start: "top top",
-                    // Map the scroll distance 1:1 or slightly slower (e.g. 1.2x) for better readability
-                    // Removing the fixed +1000 buffer which caused the "dead scroll" at the end
-                    end: () => `+=${Math.abs(scrollAmount)}`,
-                    scrub: 1,
+                    end: () => `+=${scrollDist + buffer}`,
+                    scrub: 0.3,
                     pin: true,
                     anticipatePin: 1,
                     invalidateOnRefresh: true,
@@ -129,8 +130,10 @@ export default function Services() {
             tl.to(sectionRef.current, {
                 x: getScrollAmount,
                 ease: "none",
-                duration: 1, // Duration is relative to the scrollTrigger scrub
+                duration: scrollDist,
             });
+
+            tl.to({}, { duration: buffer });
         }, triggerRef);
 
         return () => ctx.revert();

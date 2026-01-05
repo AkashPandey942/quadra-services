@@ -212,14 +212,27 @@ export default function Industries() {
                 <Box
                     ref={gridRef}
                     sx={{
-                        display: "grid",
+                        flexWrap: { xs: "nowrap", md: "wrap" },
+                        gap: { xs: 2.5, sm: 3, md: 3.5 },
+                        padding: { xs: "12px", sm: "16px", md: "20px" },
+                        ml: { xs: 0, md: 4 },
+                        pr: { xs: 2, md: 0 },
+                        // Mobile: horizontal scroll with snap
+                        overflowX: { xs: "auto", md: "visible" },
+                        overflowY: "hidden",
+                        scrollSnapType: { xs: "x mandatory", md: "none" },
+                        WebkitOverflowScrolling: { xs: "touch", md: "auto" },
+                        // Hide scrollbar
+                        msOverflowStyle: "none",
+                        scrollbarWidth: "none",
+                        "&::-webkit-scrollbar": {
+                            display: "none",
+                        },
+                        // Grid behavior on desktop
+                        display: { xs: "flex", md: "grid" },
                         gridTemplateColumns: {
-                            xs: "1fr",
-                            sm: "repeat(2, 1fr)",
                             md: "repeat(4, 1fr)"
                         },
-                        gap: { xs: 2, sm: 3, md: 3.5 },
-                        px: { xs: 2, sm: 2, md: 4 },
                     }}
                 >
                     {industries.map((industry, index) => (
@@ -229,6 +242,13 @@ export default function Industries() {
                             onMouseMove={(e) => handleMouseMove(e, index)}
                             onMouseLeave={() => handleMouseLeave(index)}
                             style={{ transformStyle: "preserve-3d" }}
+                            sx={{
+                                // Mobile scroll snap
+                                scrollSnapAlign: { xs: "center", md: "none" },
+                                scrollSnapStop: { xs: "always", md: "auto" },
+                                flexShrink: 0,
+                                width: { xs: 280, sm: 300, md: "auto" },
+                            }}
                         >
                             <Card
                                 sx={{

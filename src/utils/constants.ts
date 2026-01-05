@@ -1,1 +1,1 @@
-export const SITE_NAME = "QuadraTech Services";
+export const SITE_NAME = "Apex Nexon Services";

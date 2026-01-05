@@ -6,5 +6,5 @@ if (!process.env.MONGODB_URI) {
 
 const client = new MongoClient(process.env.MONGODB_URI);
 
-// Export a promise that resolves to the DB instance – NextAuth expects this shape
-export default client.connect().then((c) => c.db());
+// NextAuth expects a promise that resolves to the MongoClient
+export default client.connect();

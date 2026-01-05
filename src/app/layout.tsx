@@ -6,7 +6,7 @@ import SmoothScrolling from "@/components/SmoothScrolling";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Quadra Services",
+  title: "Apex Nexon",
   description: "We Build Intelligent Digital Universes",
   icons: {
     icon: "/images/apple-touch-icon.png",
