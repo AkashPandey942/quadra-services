@@ -89,6 +89,7 @@ export default function AdminLoginPage() {
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 required
+                                autoComplete="off"
                                 sx={{
                                     mb: 2,
                                     "& .MuiInputBase-root": { color: "white" },
@@ -104,6 +105,7 @@ export default function AdminLoginPage() {
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 required
+                                autoComplete="new-password"
                                 sx={{
                                     mb: 3,
                                     "& .MuiInputBase-root": { color: "white" },
@@ -128,17 +130,6 @@ export default function AdminLoginPage() {
                             </Button>
                         </form>
 
-                        <Box sx={{ mt: 3, p: 2, bgcolor: "rgba(255, 255, 255, 0.05)", borderRadius: 2 }}>
-                            <Typography variant="caption" sx={{ color: "rgba(255, 255, 255, 0.5)", display: "block" }}>
-                                Default Credentials:
-                            </Typography>
-                            <Typography variant="body2" sx={{ color: "rgba(255, 255, 255, 0.7)", mt: 0.5 }}>
-                                Email: admin@apexnexon.com
-                            </Typography>
-                            <Typography variant="body2" sx={{ color: "rgba(255, 255, 255, 0.7)" }}>
-                                Password: admin123
-                            </Typography>
-                        </Box>
                     </CardContent>
                 </Card>
             </Container>

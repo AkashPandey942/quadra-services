@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
         const adminData = JSON.parse(fs.readFileSync(ADMIN_FILE, 'utf-8'));
 
         // Simple authentication (in production, use bcrypt for password hashing)
-        if (email === adminData.email && password === 'admin123') {
+        if (email === adminData.email && password === adminData.password) {
             // Create session token (simple implementation)
             const token = Buffer.from(`${email}:${Date.now()}`).toString('base64');
 
